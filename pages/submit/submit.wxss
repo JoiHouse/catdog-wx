@@ -1,0 +1,66 @@
+.submit {
+  height: 100vh;
+  width: 100vw;
+}
+.submit-container {
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.submitInfo {
+  padding: 20px;
+}
+.submit-form {
+  padding: 20px;
+}
+.submit-form > text {
+  font-weight: 600;
+  font-size: 0.7em;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 0;
+}
+.submit-form > text::before {
+  content: "";
+  display: block;
+  border-radius: 50%;
+  height: 0.3em;
+  width: 0.3em;
+  border: 3px solid #4159e7;
+}
+.submit-form input {
+  font-weight: 600;
+  padding: 10px;
+  border-bottom: 1px solid #d7dee9;
+}
+.submit-btns {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+.submit-radio {
+  flex: 1;
+  width: 100%;
+  padding: 10px 5px;
+  font-size: 0.9em;
+  background: #f6faff;
+  text-align: center;
+  color: #d9dbe9;
+  border-radius: 19px;
+}
+
+.submit-radio.man.active {
+  background-image: linear-gradient(90deg, #5468eb, #8289f9);
+  color: #fff;
+}
+.submit-radio.woman.active {
+  background-image: linear-gradient(90deg, #ec69c1, #f58ee0e8);
+  color: #fff;
+}
+.submit-radio.none.active {
+  background-image: linear-gradient(90deg, #a8e039, #38eb38e8);
+  color: #fff;
+}

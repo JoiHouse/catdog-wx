@@ -1,0 +1,48 @@
+.infoDialog {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #fcf7ee;
+    z-index: 999;
+  }
+  .infoDialog-content {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  .infoDialog-header {
+    position: fixed;
+    background: transparent;
+    left: 18px;
+    top: 18px;
+  }
+  .infoDialog-closeBtn {
+    height: 30px;
+    width: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg t='1699593977988' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='12373' width='30' height='30'%3E%3Cpath d='M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m0-572.330667L300.629333 240.213333a42.538667 42.538667 0 0 0-60.16 0.213334 42.410667 42.410667 0 0 0-0.213333 60.16L451.669333 512 240.213333 723.370667a42.538667 42.538667 0 0 0 0.213334 60.16 42.410667 42.410667 0 0 0 60.16 0.213333L512 572.330667l211.370667 211.413333a42.538667 42.538667 0 0 0 60.16-0.213333 42.410667 42.410667 0 0 0 0.213333-60.16L572.330667 512l211.413333-211.370667a42.538667 42.538667 0 0 0-0.213333-60.16 42.410667 42.410667 0 0 0-60.16-0.213333L512 451.669333z' fill='%233D3D3D' p-id='12374'%3E%3C/path%3E%3C/svg%3E");
+  }
+  .infoDialog-closeBtn:hover {
+    cursor: pointer;
+  }
+  .infoDialog-pic image {
+    width: 100%;
+  }
+  .infoDialog-title {
+    font-weight: 600;
+    font-size: 1.6em;
+    margin-top: -50px;
+    text-align: center;
+  }
+  .infoDialog-text {
+    display: block;
+    width: 80%;
+    margin: auto;
+    font-size: 1.2em;
+    color: #212121da;
+    padding: 20px;
+  }
+  

@@ -1,0 +1,128 @@
+<view class="detail">
+  <view class="detail-content">
+    <view class="detail-pic">
+      <image src="{{animalInfo.photo_url}}" mode="aspectFill" />
+    </view>
+
+    <view class="detail-info detail-card">
+      <view class="detail-title-layout">
+        <view class="detail-title">
+          {{animalInfo.name}}
+          <text wx:if="{{animalInfo.sex == 1}}">母</text>
+          <text wx:elif="{{animalInfo.sex == 2}}">公</text>
+        </view>
+      </view>
+
+      <view class="detail-shortInfo">
+        <view class="detail-shortInfo-list">
+          <view class="detail-shortInfo-item">
+            性别
+            <text>男生</text>
+          </view>
+          <view class="detail-shortInfo-item">
+            年龄
+            <text>1岁</text>
+          </view>
+          <view class="detail-shortInfo-item">
+            品种
+            <text>中华田园犬</text>
+          </view>
+          <view class="detail-shortInfo-item">
+            恋爱状态
+            <text>单身</text>
+          </view>
+          <view class="detail-shortInfo-item">
+            是否有宝宝
+            <text>否</text>
+          </view>
+        </view>
+      </view>
+      <view class="divLine"></view>
+      <view class="detail-function">
+        <view class="detail-publisher">
+          <image src="https://joia.cn/logo.webp" />@
+
+          <view> Name </view>
+          <text>发布</text>
+        </view>
+        <view class="detail-btns">
+          <text class="iconfont icon-heart_outlined"></text>
+          <text class="iconfont icon-share"></text>
+        </view>
+      </view>
+    </view>
+
+    <view class="detail-comment-send">
+      <text class="iconfont icon-send"></text>
+      <text>评论些什么</text>
+    </view>
+    <view class="detail-comment-list">
+      <view class="detail-comment-item detail-card">
+        <view class="detail-comment-item-t">
+          <image src="https://joia.cn/logo.webp" />
+          <view class="detail-comment-t-user">
+            <view> 小小</view>
+            <text> 9月21日</text>
+          </view>
+        </view>
+        <view class="detail-comment-item-b">
+          <text class="detail-comment-b-text">这是测试评论 </text>
+          <view class="detail-comment-b-pic">
+            <view>
+              <image
+                src="https://source.unsplash.com/900x600/?nature,water,4"
+              />
+            </view>
+            <view>
+              <image
+                src="https://source.unsplash.com/900x600/?nature,water,4"
+              />
+            </view>
+            <view>
+              <image
+                src="https://source.unsplash.com/900x600/?nature,water,4"
+              />
+            </view>
+          </view>
+        </view>
+        <view class="comment-item-fun">
+          <view> </view>
+          <text class="iconfont icon-heart_outlined"></text>
+        </view>
+      </view>
+      <view class="detail-comment-item detail-card">
+        <view class="detail-comment-item-t">
+          <image src="https://joia.cn/logo.webp" />
+          <view class="detail-comment-t-user">
+            <view> 小小</view>
+            <text> 9月21日</text>
+          </view>
+        </view>
+        <view class="detail-comment-item-b">
+          <text class="detail-comment-b-text">这是测试评论 </text>
+          <view class="detail-comment-b-pic">
+            <view>
+              <image
+                src="https://source.unsplash.com/900x600/?nature,water,4"
+              />
+            </view>
+            <view>
+              <image
+                src="https://source.unsplash.com/900x600/?nature,water,4"
+              />
+            </view>
+            <view>
+              <image
+                src="https://source.unsplash.com/900x600/?nature,water,4"
+              />
+            </view>
+          </view>
+        </view>
+        <view class="comment-item-fun">
+          <view> </view>
+          <text class="iconfont icon-heart_outlined"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+<view class="login-container">
+    <view class="loginInfo">
+      <view class="form">
+        <view class="loginIcon">
+          <view class="loginIcon-svg"> </view>
+          <!-- width 34 -->
+        </view>
+        <view class="loginText">
+          <label class="loginTitle">登录猫猫狗狗</label>
+          <text class="loginP"> 登录您的账号来进行更多操作 </text>
+        </view>
+        <view class="inputview">
+          <input
+            placeholder="输入您的邮箱"
+            model:value="{{loginInfo.id}}"
+            type="text"
+            class="input_field"
+          />
+        </view>
+        <view class="inputview">
+          <input
+            placeholder="您的验证码"
+            type="text"
+            model:value="{{loginInfo.password}}"
+            class="input_field loginCode"
+          />
+        <button class="getCodeBtn">获取</button>
+        </view> 
+        <button type="primary" class="loginBtn">登录</button>
+      </view>
+    </view>
+  </view>

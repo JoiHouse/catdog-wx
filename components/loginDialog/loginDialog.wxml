@@ -1,0 +1,26 @@
+<view class="loginDialog-wrapper" bindtap="closeDialog">
+  <view class="loginDialog">
+    <view class="loginDialog-content" catchtap="stop">
+      <view>
+        <view class="loginDialog-text">
+          <view class="loginIcon">
+            <view class="loginIcon-svg"> </view>
+            <!-- width 34 -->
+          </view>
+          <view> Halo猫猫狗狗大学 </view>
+          <text>登录您的账号来进行更多操作</text>
+        </view>
+        <view class="loginDialog-function">
+          <view class="loginDialog-btn" bindtap="loginWithWx"> 微信一键登录 </view>
+          <view class="loginDialog-btn-mail" bindtap="openMailLogin">邮箱登录 </view>
+        </view>
+        <view class="loginDialog-privacy">
+          登录即代表您已经阅读并且同意
+          <text>《猫猫狗狗用户协议》</text>
+          中的内容
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

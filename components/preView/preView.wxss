@@ -1,0 +1,39 @@
+.preView-item {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  padding-bottom: 20px;
+  box-shadow: rgba(23, 25, 29, 0.2) -2px 5px 16px -18px,
+    rgba(23, 25, 29, 0.03) 0px 3px 9px 0px,
+    rgba(23, 25, 29, 0.04) 0px 0px 0px 1px;
+}
+.preView-pic {
+  width: 100%;
+  height: 166px;
+}
+.preView-pic image {
+  width: 100%;
+  height: 100%;
+}
+.preView-content {
+  padding: 10px;
+  padding-bottom: 0;
+}
+.preView-name {
+}
+.preView-name > text {
+    font-weight: 600;
+}
+.preView-tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.preView-tag {
+  margin-top: 10px;
+  background: #fce5ed;
+  color: #d8899e;
+  padding: 1px 8px;
+  font-size: 12px;
+  border-radius: 3px;
+}

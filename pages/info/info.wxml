@@ -1,0 +1,28 @@
+<view class="infoDialog">
+  <view class="infoDialog-content">
+    <view class="infoDialog-body">
+      <view class="infoDialog-pic">
+        <image src="https://drive.joia.cn/catdog/pic/catdog.png" mode="widthFix" />
+      </view>
+      <view class="infoDialog-title">🐾猫猫狗狗大学🐾</view>
+      <text class="infoDialog-text">
+      欢迎来到猫猫狗狗大学，
+      这里是一个专为校园猫狗而生的社区，帮助您更好地了解、关爱和管理校园里的毛茸伙伴们。
+
+        🏠 猫狗档案管理： 
+        上传照片、记录基本信息，建立每只猫狗的专属档案。 
+        
+        🤝社区互动平台：
+         分享日常，交流经验，共同呵护这些小生命。 
+         
+        🌟 帮助：
+        提供帮助板块，助力更多小动物找到温暖的家。
+
+        🐶
+        注册您的账号，开始您的猫狗大学之旅。 
+        🐱
+        创建您的猫狗档案，分享您的爱与关怀。
+      </text>
+    </view>
+  </view>
+</view>

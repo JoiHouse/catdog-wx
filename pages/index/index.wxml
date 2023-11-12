@@ -1,0 +1,86 @@
+<page-meta page-style="{{isShowInfo ? 'overflow:hidden' : ''}}"></page-meta>
+
+<view class="container">
+  <view class="top">
+    <view class="top-halo">
+      <view class="topHelo-title">
+        <text> Halo, \n {{userInfo.name}}</text>
+      </view>
+    </view>
+    <view class="top-userIcon" bind:tap="openUser">
+      <image src="https://drive.joia.cn/catdog/pic/login.jpg" />
+    </view>
+  </view>
+  <view class="learnUs"          bindtap="openPage"
+          data-url="/pages/info/info" >
+    <view class="learnUs-container">
+      <view class="learnUs-text">
+        {{animalInfo.total}}只猫猫狗狗已入学
+        <text>查看“猫猫狗狗”公益行动</text>
+      </view>
+      <view class="learnUs-interBtn">
+        <text>></text>
+      </view>
+    </view>
+  </view>
+  <view class="functionArea">
+    <view class="title-c"> 寻找猫猫狗狗</view>
+    <view class="funArea-content">
+      <view class="funArea-left">
+        <view class="funArea-left-content card-c" bindtap="randomAnimal">
+          <view class="funArea-left-big">Biu</view>
+          <view class="funArea-left-small">随机一只猫猫狗狗</view>
+        </view>
+      </view>
+      <view class="funArea-right">
+        <view
+          class="funArea-child card-c"
+          style="background: linear-gradient(to right bottom, #7cecc6, #15b695)"
+          bindtap="openPage"
+          data-url="/pages/submit/submit"
+        >
+          <view>登记入学</view>
+          <text>上报未登记的猫狗</text>
+          <image src="https://drive.joia.cn/catdog/pic/cat.png" />
+        </view>
+        <view class="funArea-child card-c">
+          <view>报告老师</view>
+          <text>反馈问题</text>
+          <image src="https://drive.joia.cn/catdog/pic/dog.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="showAnimal">
+    <view class="title-c">Show All</view>
+    <view class="showAnimal-search">
+      <view>
+        <button class="search-button">
+          <view class="search-icon"> </view>
+        </button>
+      </view>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="搜索些什么"
+        v-model="searchValue"
+      />
+    </view>
+
+    <view class="showAnimal-list">
+      <preview
+        style="width:{{previewItemWidth}}px"
+        wx:for="{{animalInfo.detail}}"
+        wx:key="item"
+        bindtap="openPage"
+        data-url="{{'/pages/detail/detail?id=' + item.id}}"
+        animal="{{item}}"
+      >
+      </preview>
+    </view>
+  </view>
+</view>
+<info-dialog
+  wx:if="{{isShowInfo}}"
+  bind:active="infoDialogActive"
+></info-dialog>

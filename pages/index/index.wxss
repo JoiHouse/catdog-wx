@@ -1,0 +1,165 @@
+.top {
+  display: flex;
+  padding: var(--padding-c);
+  align-items: center;
+}
+.top-halo {
+ flex: 1;
+}
+.topHelo-title {
+  font-weight: 600;
+  font-size: 1.2em;
+}
+.top-userIcon {
+  height: 43px;
+  width: 43px;
+  border-radius: 50%;
+  background-color: #d6d5d6;
+  overflow: hidden;
+  flex-shrink: 1;
+}
+.top-userIcon image {
+  height: 100%;
+  width: 100%;
+}
+.learnUs {
+  padding: var(--padding-c);
+  padding-top: 0;
+}
+.learnUs-container {
+  background-image: linear-gradient(
+    -33deg,
+    rgb(253, 142, 136) 0%,
+    rgb(253, 181, 145) 99%
+  );
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--padding-c) * 1.3);
+  border-radius: var(--radius-c);
+  overflow: hidden;
+  color: #fbfbfd;
+}
+.learnUs-text {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.learnUs-text text {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.7em;
+  font-weight: 500;
+}
+.learnUs-interBtn {
+  height: 1em;
+  width: 1em;
+  padding: 0.5em;
+  position: relative;
+  background: #f8f7f744;
+  border-radius: 50%;
+  overflow: hidden;
+  text-align: center;
+}
+.learnUs-interBtn text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.functionArea {
+  padding: var(--padding-c);
+}
+
+.funArea-content {
+  display: flex;
+  gap: 8px;
+}
+.funArea-content > view {
+  display: flex;
+  width: 50%;
+  height: 158px;
+}
+.funArea-left .funArea-left-content,
+.funArea-right .funArea-child {
+  border-radius: calc(var(--radius-c) - 3px);
+}
+.funArea-left .funArea-left-content {
+  width: 100%;
+  background-image: linear-gradient(
+    -36deg,
+    rgb(18, 104, 189) 0%,
+    rgb(134, 188, 241) 99%
+  );
+  color: #fbfbfd;
+}
+.funArea-left-big {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-top: 30%;
+}
+.funArea-left-small {
+  font-size: 0.8em;
+  margin-top: 10%;
+}
+.funArea-content .funArea-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.funArea-child {
+  height: 50%;
+  background: linear-gradient(-36deg, #8b6af8 0%, #b09eeb 99%);
+  position: relative;
+  color: #fbfbfd;
+}
+.funArea-child > view {
+  font-size: 1rem;
+}
+.funArea-child > text {
+  font-size: 0.86rem;
+}
+.funArea-child image {
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  height: 30px;
+  width: 33px;
+}
+.showAnimal {
+  padding: var(--padding-c);
+  padding-bottom: 30px;
+  --card-radius: 6px;
+  --card-shadow: 0 0 7px rgb(133, 133, 133);
+}
+.showAnimal-list {
+  width: 100%;
+  padding: var(--padding-c) 0;
+  padding-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+.showAnimal-item {
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  margin-top: 12px;
+}
+.showAnimal-itemtText {
+  padding-bottom: 18px;
+  margin-top: 10px;
+}
+.showAnimal-itemtText text {
+  padding: 1em;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+@media (min-width: 490px) {
+  .funArea-left-big {
+    font-size: 1.5em;
+    margin-top: 10%;
+  }
+  .funArea-left-small {
+    font-size: 1em;
+  }
+}
