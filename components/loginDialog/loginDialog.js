@@ -33,21 +33,23 @@ Component({
       this.closeDialog()
     },
     loginWithWx() {
-      wx.login({
-        success: res => {
+       wx.login({
+        success (res) {
           if (res.code) {
-            let URL = 'https://api.weixin.qq.com/sns/jscode2session?appid=##################&secret=*************** ***************& js_code='+res.code+' & grant_type=authorization_code'
+            //发起网络请求
+            console.log(res);
             wx.request({
-              url: URL,
-              success: function (res) {
-                console.log(res.data)//res.data中有openid
+              url: 'https://example.com/onLogin',
+              method:'POST',
+              data: {
+                code: res.code
               }
             })
+          } else {
+            console.log('登录失败！' + res.errMsg)
           }
         }
       })
-
-
 
     }
   }

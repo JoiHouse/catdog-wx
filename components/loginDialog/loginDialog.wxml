@@ -12,7 +12,7 @@
         </view>
         <view class="loginDialog-function">
           <view class="loginDialog-btn" bindtap="loginWithWx"> 微信一键登录 </view>
-          <view class="loginDialog-btn-mail" bindtap="openMailLogin">邮箱登录 </view>
+          <view class="loginDialog-btn-mail" bindtap="closeDialog">暂不登录 </view>
         </view>
         <view class="loginDialog-privacy">
           登录即代表您已经阅读并且同意

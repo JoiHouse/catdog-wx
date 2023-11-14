@@ -14,15 +14,6 @@ Component({
   data: {
     itemWidth: (wx.getSystemInfoSync().windowWidth - 100) / 3,
     picList: [
-      {
-        "url": 'https://source.unsplash.com/900x600/?nature,water,4'
-      },
-      {
-        "url": 'https://source.unsplash.com/900x600/?nature,water,4'
-      },
-      {
-        "url": 'https://source.unsplash.com/900x600/?nature,water,4'
-      },
 
     ]
   },
