@@ -11,8 +11,7 @@
       <image src="https://drive.joia.cn/catdog/pic/login.jpg" />
     </view>
   </view>
-  <view class="learnUs"          bindtap="openPage"
-          data-url="/pages/info/info" >
+  <view class="learnUs" bindtap="openPage" data-url="/pages/info/info">
     <view class="learnUs-container">
       <view class="learnUs-text">
         {{animalInfo.total}}只猫猫狗狗已入学
@@ -40,12 +39,12 @@
           data-url="/pages/submit/submit"
         >
           <view>登记入学</view>
-          <text>上报未登记的猫狗</text>
+          <text>上报猫猫狗狗</text>
           <image src="https://drive.joia.cn/catdog/pic/cat.png" />
         </view>
         <view class="funArea-child card-c">
           <view>报告老师</view>
-          <text>反馈问题</text>
+          <text>反馈猫猫狗狗问题</text>
           <image src="https://drive.joia.cn/catdog/pic/dog.png" />
         </view>
       </view>

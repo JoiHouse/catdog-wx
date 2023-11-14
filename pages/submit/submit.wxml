@@ -66,49 +66,52 @@
       </view>
       <view class="submit-form">
         <text>标签</text>
-        <view class="submit-btns">
+        <view class="submit-tags">
           <view
-            class="submit-radio man {{formData.type===1?'active':''}}"
-            bindtap="chooseType"
-            data-type="1"
+            wx:for="{{tagList}}"
+            wx:key="item"
+            class="submit-radio man {{item.status?'active':''}}"
+            bindtap="chooseTag"
+            data-tag="{{index}}"
+            style="width:{{tagItemWidth}}px"
           >
-            疫苗
+            {{item.value}}
           </view>
+
           <view
-            class="submit-radio man {{formData.type===2?'active':''}}"
-            bindtap="chooseType"
-            data-type="2"
+            class="submit-radio submit-add"
+            bindtap="dialogActive"
+            style="width:{{tagItemWidth}}px"
           >
-            绝育
-          </view>
-        </view>
-        <view class="submit-btns">
-          <view
-            class="submit-radio man {{formData.type===1?'active':''}}"
-            bindtap="chooseType"
-            data-type="1"
-          >
-            驱虫
-          </view>
-          <view
-            class="submit-radio man {{formData.type===2?'active':''}}"
-            bindtap="chooseType"
-            data-type="2"
-          >
-            有小宝宝
+            添加 +
           </view>
         </view>
-        <view class="submit-btns">
-          <view
-            class="submit-radio man {{formData.type===2?'active':''}}"
-            bindtap="chooseType"
-            data-type="2"
-          >
-            添加标签
-          </view>
-        </view>
-  
+      </view>
+      <view class="submit-form">
+        <text>图片</text>
+        <upload-pic> </upload-pic>
+      </view>
+
+      <view
+        class="submit-radio submit-btn"
+        bindtap="uploadInfo"
+        style="width: 80%; margin: 20px auto 0 auto"
+      >
+        大功告成
       </view>
     </view>
   </view>
 </view>
+<add-tag
+  bindtap="dialogActive"
+  wx:if="{{isShowAdd}}"
+  bind:addTag="addTag"
+  bind:openDialog="openDialog"
+  data-title
+  data-info
+></add-tag>
+<dialog
+  isShowDialog="{{isShowDialog}}"
+  title="{{dialogInfo.title}}"
+  info="{{dialogInfo.info}}"
+></dialog>

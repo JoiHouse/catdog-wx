@@ -1,0 +1,16 @@
+@import "../../../../components/loginDialog/loginDialog.wxss";
+.add-input {
+  margin: 16px auto;
+  padding: 16px 10px;
+  background: #fff;
+  color: #9e9e9e;
+  font-size: 15px;
+  width: 88%;
+  display: flex;
+  font-weight: 600;
+  padding: 10px;
+  border-bottom: 1px solid #d7dee9;
+}
+.loginDialog .loginDialog-content {
+  top: 50%;
+}

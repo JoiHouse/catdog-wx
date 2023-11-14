@@ -181,7 +181,13 @@
   color: #666565;
   display: flex;
 }
+.comment-item-fun >view{
+  margin: 5px 26px 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
 .comment-item-fun .iconfont {
   color: #8c8c8c;
-  margin: 5px 26px 0 auto;
 }

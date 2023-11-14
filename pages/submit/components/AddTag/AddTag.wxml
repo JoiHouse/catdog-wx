@@ -1,0 +1,31 @@
+<view class="loginDialog-wrapper" bindtap="closeDialog">
+  <view class="loginDialog">
+    <view class="loginDialog-content" catchtap="stop">
+      <view>
+        <view class="loginDialog-text">
+          <view class="loginIcon">
+            <view class="loginIcon-svg"> </view>
+            <!-- width 34 -->
+          </view>
+          <view> 想一个符合猫猫狗狗的标签 </view>
+        </view>
+        <input
+          type="text"
+          class="add-input"
+          placeholder="输入些什么"
+          model:value="{{tagValue}}"
+          maxlength="4"
+        />
+        <view class="loginDialog-function">
+          <view
+            class="loginDialog-btn"
+            bindtap="addTag"
+            style="background-image: linear-gradient(90deg, #cbe794, #c9eb86)"
+          >
+            添加
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,35 @@
+<view class="submitBySetps">
+  <view class="submitB-container">
+    <view class="submitB-header" wx:if="{{currentStep!==0}}">
+      <view class="setp-show">
+        <view class="setp-item active"> 信息</view>
+        <view class="setp-item"> 情况</view>
+        <view class="setp-item"> 完成</view>
+      </view>
+    </view>
+    <view class="submitB-body">
+      <view class="step1">
+        <view class="step-h"> 123 </view>
+        <view class="step1-box active">
+          <view class="step1-box-c box1">
+            <text class="icon">
+              <view class="svg">1</view>
+            </text>
+          </view>
+          <view class="step1-box-c box2">
+            <text class="icon">
+              <view class="svg">1</view>
+            </text>
+          </view>
+          <view class="step1-box-c box3"
+            ><text class="icon">
+              <view class="svg">1</view>
+            </text>
+          </view>
+          <view class="step1-box-c box4"></view>
+        </view>
+      </view>
+    </view>
+    <view class="submitB-footer"> </view>
+  </view>
+</view>

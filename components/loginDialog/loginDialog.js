@@ -25,29 +25,30 @@ Component({
     closeDialog: function (even) {
       this.triggerEvent('active', {})
     },
-    
+
     openMailLogin: function () {
       wx.navigateTo({
         url: '/pages/login/login',
       });
       this.closeDialog()
     },
-    loginWithWx(){
-      // wx.login({
-      //   success (res) {
-      //     if (res.code) {
-      //       //发起网络请求
-      //       wx.request({
-      //         url: 'https://example.com/onLogin',
-      //         data: {
-      //           code: res.code
-      //         }
-      //       })
-      //     } else {
-      //       console.log('登录失败！' + res.errMsg)
-      //     }
-      //   }
-      // })
+    loginWithWx() {
+      wx.login({
+        success: res => {
+          if (res.code) {
+            let URL = 'https://api.weixin.qq.com/sns/jscode2session?appid=##################&secret=*************** ***************& js_code='+res.code+' & grant_type=authorization_code'
+            wx.request({
+              url: URL,
+              success: function (res) {
+                console.log(res.data)//res.data中有openid
+              }
+            })
+          }
+        }
+      })
+
+
+
     }
   }
 })

@@ -6,7 +6,8 @@
     "pages/detail/detail",
     "pages/submit/submit",
     "pages/report/report",
-    "pages/info/info"
+    "pages/info/info",
+    "pages/submitBySteps/submitBySteps"
   ],
   "window": {
     "backgroundTextStyle": "light",

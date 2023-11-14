@@ -56,6 +56,7 @@ Page({
     })
   },
   onLoad() {
+    this.openPage('/pages/submitBySteps/submitBySteps' )
     let pageWidth = wx.getSystemInfoSync().windowWidth;
     this.setData({
       previewItemWidth: pageWidth / 2 - 27

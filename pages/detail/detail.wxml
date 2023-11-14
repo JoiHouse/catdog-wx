@@ -41,7 +41,6 @@
       <view class="detail-function">
         <view class="detail-publisher">
           <image src="https://joia.cn/logo.webp" />@
-
           <view> Name </view>
           <text>发布</text>
         </view>
@@ -86,8 +85,10 @@
           </view>
         </view>
         <view class="comment-item-fun">
-          <view> </view>
-          <text class="iconfont icon-heart_outlined"></text>
+          <view>
+            <text class="iconfont icon-comment"></text>
+            <text class="iconfont icon-heart_outlined"></text>
+          </view>
         </view>
       </view>
       <view class="detail-comment-item detail-card">
@@ -120,7 +121,10 @@
         </view>
         <view class="comment-item-fun">
           <view> </view>
-          <text class="iconfont icon-heart_outlined"></text>
+          <view>
+            <text class="iconfont icon-comment"></text>
+            <text class="iconfont icon-heart_outlined"></text>
+          </view>
         </view>
       </view>
     </view>

@@ -1,2 +1,11 @@
-<!--components/dialog/dialog.wxml-->
-<text>components/dialog/dialog.wxml</text>
+<view class="dialog" wx:if="{{isShowDialog}}">
+  <view>
+    <view class="dialog-container" catchtap="stop">
+      <view class="dialog-header"> {{title}} </view>
+      <view class="dialog-body" wx:if="{{info}}"> {{info}} <slot></slot> </view>
+      <view class="dialog-footer">
+        <view class="dialog-btn" bindtap="closeDialog"> 确认 </view>
+      </view>
+    </view>
+  </view>
+</view>
