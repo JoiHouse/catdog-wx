@@ -1,253 +1,263 @@
 .submitBySetps {
-  height: 100vh;
-  width: 100vw;
-  background: #f4f5fa;
+	height: 100vh;
+	width: 100vw;
+	background: #f4f5fa;
 }
 .submitB-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
 }
 .submitB-header {
-  height: 50px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
+	height: 50px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
 }
 .submitB-body {
-  top: 50px;
-  width: 100%;
-  position: absolute;
+	top: 50px;
+	width: 100%;
+	position: absolute;
 }
 .setp-show {
-  --radius: 18px;
-  background-color: #e3e5f2dc;
-  display: flex;
-  height: 80%;
-  width: 80%;
-  margin: auto;
-  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
-  padding: 3px;
-  border-radius: var(--radius);
+	--radius: 18px;
+	background-color: #e3e5f2dc;
+	display: flex;
+	height: 80%;
+	width: 80%;
+	margin: auto;
+	box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+	padding: 3px;
+	border-radius: var(--radius);
 }
 .setp-item {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: var(--radius);
-  padding: 0.2rem 0;
-  color: rgb(71, 86, 108);
-  font-weight: 600;
-  transition: 0.25s all cubic-bezier(0.42, 0, 0.68, 1.35);
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	border-radius: var(--radius);
+	padding: 0.2rem 0;
+	color: rgb(71, 86, 108);
+	font-weight: 600;
+	transition: 0.25s all cubic-bezier(0.42, 0, 0.68, 1.35);
 }
 .setp-item.active {
-  background-color: #fff;
-  color: #5868e5;
+	background-color: #fff;
+	color: #5868e5;
 }
 .step-h {
-  text-align: center;
-  font-weight: 600;
-  font-size: 1.2em;
-  padding-top: 3em;
+	text-align: center;
+	font-weight: 600;
+	font-size: 1.2em;
+	padding-top: 3em;
 }
 .step {
-  display: none;
-  transition: 0.25s all cubic-bezier(0.42, 0, 0.68, 1.35);
+	display: none;
+	transition: 0.25s all cubic-bezier(0.42, 0, 0.68, 1.35);
 }
 .step.stepActive {
-  display: block;
+	display: block;
 }
 .step0 {
-  height: calc(80vh - 50px);
-  width: 100vw;
+	height: calc(80vh - 50px);
+	width: 100vw;
 }
 .step0-box {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  border-radius: 30px;
-  transition: all 1s ease-in-out;
+	position: relative;
+	width: 100%;
+	height: 300px;
+	border-radius: 30px;
+	transition: all 1s ease-in-out;
 }
 
 .step0-box-c {
-  position: absolute;
-  padding: 10px;
-  text-align: right;
-  background: rgba(255, 255, 255, 0.389);
-  border-top: 2px solid rgb(255, 255, 255);
-  border-right: 1px solid white;
-  border-radius: 100% 29% 51% 10%/10% 23% 75% 1%;
-  transform-origin: bottom left;
-  transition: all 1s ease-in-out;
+	position: absolute;
+	padding: 10px;
+	text-align: right;
+	background: rgba(255, 255, 255, 0.389);
+	border-top: 2px solid rgb(255, 255, 255);
+	border-right: 1px solid white;
+	border-radius: 100% 29% 51% 10%/10% 23% 75% 1%;
+	transform-origin: bottom left;
+	transition: all 1s ease-in-out;
 }
 .step0-box-c text {
-  font-weight: 600;
-  color: #fff;
-  padding: 1em;
-  margin-top: 1.3em;
-}
-.box::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  transition: all 0.5s ease-in-out;
+	font-weight: 600;
+	color: #fff;
+	padding: 1em;
+	margin-top: 1.3em;
 }
 .box1 {
-  width: 70%;
-  height: 70%;
-  bottom: -70%;
-  left: -70%;
-  background: radial-gradient(
-    circle at 100% 107%,
-    #fda0d5e2 0%,
-    #9cb8ec 30%,
-    #00ffee 60%,
-    #62c2fe 100%
-  );
+	width: 70%;
+	height: 70%;
+	bottom: -70%;
+	left: -70%;
+	background: radial-gradient(
+		circle at 100% 107%,
+		#fbcee8e2 0%,
+		#b7cefa 50%,
+		#62c2fe 100%
+	);
 }
 .box1::before {
-  background: radial-gradient(
-    circle at 30% 107%,
-    #fdf497 0%,
-    #fdf497 5%,
-    #ff53d4 60%,
-    #62c2fe 90%
-  );
+	background: radial-gradient(
+		circle at 30% 107%,
+		#fdf497 0%,
+		#e8d612 5%,
+		#ff53d4 60%,
+		#62c2fe 90%
+	);
 }
 .box2 {
-  width: 50%;
-  height: 50%;
-  bottom: -50%;
-  left: -50%;
-  transition-delay: 0.2s;
+	width: 50%;
+	height: 50%;
+	bottom: -50%;
+	left: -50%;
+	transition-delay: 0.2s;
 }
 .box2::before {
-  background: radial-gradient(circle at 30% 107%, #adebfbe4 0%, #33b7ebe4 90%);
+	background: radial-gradient(circle at 30% 107%, #adebfbe4 0%, #33b7ebe4 90%);
 }
 .box3 {
-  width: 30%;
-  height: 30%;
-  bottom: -30%;
-  left: -30%;
-  transition-delay: 0.4s;
+	width: 30%;
+	height: 30%;
+	bottom: -30%;
+	left: -30%;
+	transition-delay: 0.4s;
 }
 .box3::before {
-  background: radial-gradient(circle at 30% 107%, #b7bcf6 0%, #cb8ff6e4 90%);
+	background: radial-gradient(circle at 30% 107%, #b7bcf6 0%, #cb8ff6e4 90%);
 }
 .box4 {
-  width: 10%;
-  height: 10%;
-  bottom: -10%;
-  left: -10%;
-  transition-delay: 0.6s;
+	width: 10%;
+	height: 10%;
+	bottom: -10%;
+	left: -10%;
+	transition-delay: 0.6s;
 }
 .step0-box.active {
-  transform: scale(1.1);
+	transform: scale(1.1);
 }
 .step0-box.active .step0-box-c {
-  bottom: -1px;
-  left: -1px;
+	bottom: -1px;
+	left: -1px;
 }
 .nextStep {
-  width: 60%;
-  margin: auto;
-  padding: 10px 5px;
-  font-size: 0.9em;
-  background-image: linear-gradient(90deg, #cbe794, #c9eb86);
-  text-align: center;
-  color: #ffffff;
-  font-weight: 600;
-  border-radius: 19px;
-  transition: 0.25s all cubic-bezier(0.42, 0, 0.68, 1.35);
+	width: 60%;
+	margin: auto;
+	padding: 10px 5px;
+	font-size: 0.9em;
+	background-image: linear-gradient(90deg, #cbe794, #c9eb86);
+	text-align: center;
+	color: #ffffff;
+	font-weight: 600;
+	border-radius: 19px;
+	transition: 0.25s all cubic-bezier(0.42, 0, 0.68, 1.35);
 }
 .submitB-footer {
-  position: fixed;
-  width: 100%;
-  bottom: 30px;
+	position: fixed;
+	width: 100%;
+	bottom: 30px;
 }
 .submitBInfo {
-  width: calc(100% - 40px);
-  padding: 20px;
-  padding-bottom: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+	width: calc(100% - 40px);
+	padding: 20px;
+	padding-bottom: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .submitB-form {
-  padding: 20px;
-  width: 80%;
+	padding: 20px;
+	width: 80%;
 }
 
 .submitB-form > text {
-  font-weight: 600;
-  font-size: 1em;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  padding: 10px 0;
+	font-weight: 600;
+	font-size: 1em;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	padding: 10px 0;
 }
 .submitB-form > text::before {
-  content: "";
-  display: block;
-  border-radius: 50%;
-  height: 0.3em;
-  width: 0.3em;
-  border: 3px solid #4159e7;
+	content: "";
+	display: block;
+	border-radius: 50%;
+	height: 0.3em;
+	width: 0.3em;
+	border: 3px solid #4159e7;
 }
 .submitB-form input {
-  font-weight: 600;
-  padding: 10px;
-  height: 2em;
-  margin: auto;
-  text-align: center;
-  border-bottom: 1px solid #d7dee9;
+	font-weight: 600;
+	padding: 10px;
+	height: 2em;
+	margin: auto;
+	text-align: center;
+	border-bottom: 1px solid #d7dee9;
 }
 .submitB-btns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	margin-top: 10px;
 }
 
 .submitB-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 10px;
 }
 .submitB-tags .submitB-radio {
-  flex: none;
+	flex: none;
 }
 .submitB-radio {
-  flex: 1;
-  width: 100%;
-  padding: 10px 5px;
-  font-size: 1em;
-  background: #e9ecf0;
-  text-align: center;
-  color: #cdcfdde7;
-  font-weight: 600;
-  border-radius: 19px;
+	flex: 1;
+	width: 100%;
+	padding: 10px 5px;
+	font-size: 1em;
+	background: #e9ecf0;
+	text-align: center;
+	color: #cdcfdde7;
+	font-weight: 600;
+	border-radius: 19px;
 }
 
 .submitB-radio.b.active {
-  background-image: linear-gradient(90deg, #5468eb, #8289f9);
-  color: #fff;
+	background-image: linear-gradient(90deg, #5468eb, #8289f9);
+	color: #fff;
 }
 .submitB-radio.p.active {
-  background-image: linear-gradient(90deg, #ec69c1, #f58ee0e8);
-  color: #fff;
+	background-image: linear-gradient(90deg, #ec69c1, #f58ee0e8);
+	color: #fff;
 }
 .submitB-radio.g.active {
-  background-image: linear-gradient(90deg, #94c0e7, #70b0e9);
-  color: #fff;
+	background-image: linear-gradient(90deg, #94c0e7, #70b0e9);
+	color: #fff;
+}
+.submitB-form-more {
+	text-align: center;
+	padding: 10px 0;
+	font-size: 1em;
+	color: #b2b3b9e7;
+	font-weight: 600;
+	border-radius: 19px;
+	background: #e9ecf0b7;
+	margin-top: 10px;
+}
+.submitB-end {
+	width: 100%;
+}
+.submitB-end image {
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
 }

@@ -6,7 +6,8 @@
     "pages/submit/submit",
     "pages/report/report",
     "pages/info/info",
-    "pages/submitBySteps/submitBySteps"
+    "pages/submitBySteps/submitBySteps",
+    "pages/myPost/myPost"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,5 +17,9 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {
+    "dialog": "../../components/dialog/dialog",
+    "loading": "../../components/loading/loading"
+  }
 }

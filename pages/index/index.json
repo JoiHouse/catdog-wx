@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "info-dialog": "../../components/infoDialog/infoDialog",
-    "preview": "../../components/preView/preView"
+    "preview": "../../components/preView/preView",
+    "dialog": "../../components/dialog/dialog",
+    "loading": "../../components/loading/loading"
   }
 }

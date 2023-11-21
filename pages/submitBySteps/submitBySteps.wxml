@@ -1,174 +1,187 @@
 <view class="submitBySetps">
-  <view class="submitB-container">
-    <view class="submitB-header" wx:if="{{currentStep!==0}}">
-      <view class="setp-show" style="--step-width:{{}}">
-        <view
-          class="setp-item {{currentStep==1?'active':''}}"
-          data-step="1"
-          bindtap="changeStep"
-        >
-          信息
-        </view>
-        <view
-          class="setp-item {{currentStep==2?'active':''}}"
-          data-step="2"
-          bindtap="changeStep"
-        >
-          情况
-        </view>
-        <view
-          class="setp-item {{currentStep==3?'active':''}}"
-          data-step="3"
-          bindtap="changeStep"
-        >
-          完成
-        </view>
-      </view>
-    </view>
+	<view class="submitB-container">
+		<view
+			class="submitB-header"
+			wx:if="{{currentStep!==0}}">
+			<view
+				class="setp-show"
+				style="--step-width:{{}}">
+				<view
+					class="setp-item {{currentStep==1?'active':''}}"
+					data-step="1"
+					bindtap="changeStep">
+					信息
+				</view>
+				<view
+					class="setp-item {{currentStep==2?'active':''}}"
+					data-step="2"
+					bindtap="changeStep">
+					情况
+				</view>
+				<view
+					class="setp-item {{currentStep==3?'active':''}}"
+					data-step="3"
+					bindtap="changeStep">
+					完成
+				</view>
+			</view>
+		</view>
 
-    <view class="submitB-body">
-      <view
-        class="{{currentStep==0?'stepActive':''}} step step0"
-        wx:if="{{currentStep==0}}"
-      >
-        <view class="step-h">
-          <text>
-            登记猫猫狗狗，\n让你能更好记录生活\n并且给社会带来更多好处
-          </text>
-        </view>
-        <view class="step0-box {{isShowStep0 ? 'active':''}}">
-          <view class="step0-box-c box1">
-            <text>居民健康</text>
-          </view>
-          <view class="step0-box-c box2">
-            <text>社区安全</text>
-          </view>
-          <view class="step0-box-c box3">
-            <text>人宠和谐 </text>
-          </view>
-        </view>
-      </view>
+		<view class="submitB-body">
+			<view
+				class="{{currentStep==0?'stepActive':''}} step step0"
+				wx:if="{{currentStep==0}}">
+				<view class="step-h">
+					<text>
+						登记猫猫狗狗，\n让你能更好记录生活\n并且给社会带来更多好处
+					</text>
+				</view>
+				<view class="step0-box {{isShowStep0 ? 'active':''}}">
+					<view class="step0-box-c box1">
+						<text>居民健康</text>
+					</view>
+					<view class="step0-box-c box2">
+						<text>社区安全</text>
+					</view>
+					<view class="step0-box-c box3">
+						<text>人宠和谐 </text>
+					</view>
+				</view>
+			</view>
 
-      <view
-        class="{{currentStep==1?'stepActive':''}} step step1"
-        wx:if="{{currentStep==1}}"
-      >
-        <view class="submitBInfo">
-          <view class="submitB-form">
-            <text>昵称</text>
-            <input
-              type="text"
-              placeholder="猫猫狗狗昵称"
-              value="{{formData.name}}"
-            />
-          </view>
+			<view
+				class="{{currentStep==1?'stepActive':''}} step step1"
+				wx:if="{{currentStep==1}}">
+				<view class="submitBInfo">
+					<view class="submitB-form">
+						<text>昵称</text>
+						<!-- 绑定data.name -->
+						<input
+							type="text"
+							placeholder="猫猫狗狗昵称"
+							model:value="{{name}}" />
+					</view>
 
-          <view class="submitB-form">
-            <text>种类</text>
-            <view class="submitB-btns">
-              <view
-                class="submitB-radio p {{formData.type===1?'active':''}}"
-                bindtap="chooseType"
-                data-type="1"
-              >
-                猫猫
-              </view>
-              <view
-                class="submitB-radio b {{formData.type===2?'active':''}}"
-                bindtap="chooseType"
-                data-type="2"
-              >
-                狗狗
-              </view>
-            </view>
-          </view>
+					<view class="submitB-form">
+						<text>种类</text>
+						<view class="submitB-btns">
+							<view
+								class="submitB-radio p {{type===1?'active':''}}"
+								bindtap="chooseType"
+								data-type="1">
+								猫猫
+							</view>
+							<view
+								class="submitB-radio b {{type===2?'active':''}}"
+								bindtap="chooseType"
+								data-type="2">
+								狗狗
+							</view>
+						</view>
+					</view>
 
-          <!-- <view class="submitB-form"> -->
-            <!-- <text>标签</text> -->
-            <!-- <view class="submitB-tags"> -->
-              <!-- <view -->
-                <!-- wx:for="{{tagList}}" -->
-                <!-- wx:key="item" -->
-                <!-- class="submiBt-radio man {{item.status?'active':''}}" -->
-                <!-- bindtap="chooseTag" -->
-                <!-- data-tag="{{index}}" -->
-                <!-- style="width:{{tagItemWidth}}px" -->
-              <!-- > -->
-                <!-- {{item.value}} -->
-              <!-- </view> -->
-<!--  -->
-              <!-- <view -->
-                <!-- class="submitB-radio submitB-add" -->
-                <!-- bindtap="dialogActive" -->
-                <!-- style="width:{{tagItemWidth}}px" -->
-              <!-- > -->
-                <!-- 添加 + -->
-              <!-- </view> -->
-            <!-- </view> -->
-          <!-- </view> -->
-        </view>
-      </view>
+					<!-- <view class="submitB-form"> -->
+					<!-- <text>标签</text> -->
+					<!-- <view class="submitB-tags"> -->
+					<!-- <view -->
+					<!-- wx:for="{{tagList}}" -->
+					<!-- wx:key="item" -->
+					<!-- class="submiBt-radio man {{item.status?'active':''}}" -->
+					<!-- bindtap="chooseTag" -->
+					<!-- data-tag="{{index}}" -->
+					<!-- style="width:{{tagItemWidth}}px" -->
+					<!-- > -->
+					<!-- {{item.value}} -->
+					<!-- </view> -->
+					<!--  -->
+					<!-- <view -->
+					<!-- class="submitB-radio submitB-add" -->
+					<!-- bindtap="dialogActive" -->
+					<!-- style="width:{{tagItemWidth}}px" -->
+					<!-- > -->
+					<!-- 添加 + -->
+					<!-- </view> -->
+					<!-- </view> -->
+					<!-- </view> -->
+				</view>
+			</view>
 
-      <view
-        class="{{currentStep==2?'stepActive':''}} step step2"
-        wx:if="{{currentStep==2}}"
-        >
-        
-         <view class="submitBInfo">
-          <view class="submitB-form">
-            <text>发现地点</text>
-            <input
-              type="text"
-              placeholder="发现的地点"
-              value="{{formData.name}}"
-            />
-          </view>
+			<view
+				class="{{currentStep==2?'stepActive':''}} step step2"
+				wx:if="{{currentStep==2}}">
+				<view class="submitBInfo">
+					<view class="submitB-form">
+						<text>发现地点</text>
+						<input
+							type="text"
+							placeholder="发现的地点"
+							model:value="{{foundPlace}}" />
+					</view>
 
-          <view class="submitB-form">
-            <text>健康状态</text>
-            <view class="submitB-btns">
-              <view
-                class="submitB-radio p {{formData.status===1?'active':''}}"
-                bindtap="chooseStatus"
-                data-status="1"
-              >
-                健康
-              </view>
-              <view
-                class="submitB-radio b {{formData.status===0?'active':''}}"
-                bindtap="chooseStatus"
-                data-status="0"
-              >
-                生病
-              </view>
-              <view
-                class="submitB-radio g {{formData.status===-1?'active':''}}"
-                bindtap="chooseStatus"
-                data-status="-1"
-              >
-                未知
-              </view>
-            </view>
-          </view>
- <view class="submitB-form">
-        <text>图片</text>
-        <upload-pic> </upload-pic>
-      </view>
-      
-        </view>
-      </view>
+					<view class="submitB-form">
+						<text>健康状态</text>
+						<view class="submitB-btns">
+							<view
+								class="submitB-radio p {{status===1?'active':''}}"
+								bindtap="chooseStatus"
+								data-status="1">
+								健康
+							</view>
+							<view
+								class="submitB-radio b {{status===0?'active':''}}"
+								bindtap="chooseStatus"
+								data-status="0">
+								生病
+							</view>
+							<view
+								class="submitB-radio g {{status===-1?'active':''}}"
+								bindtap="chooseStatus"
+								data-status="-1">
+								未知
+							</view>
+						</view>
+					</view>
+					<view class="submitB-form">
+						<text>图片</text>
+						<upload-pic> </upload-pic>
+					</view>
+					<view class="submitB-form">
+						<view
+							class="submitB-form-more"
+							bindtap="openSubmitMore">
+							知道更多信息？
+						</view>
+					</view>
+				</view>
+			</view>
 
-      <view
-        class="{{currentStep==3?'stepActive':''}} step step3"
-        wx:if="{{currentStep==3}}"
-        >123312
-      </view>
-    </view>
+			<view
+				class="{{currentStep==3?'stepActive':''}} step step3"
+				wx:if="{{currentStep==3}}">
+				<view class="step-h">
+					<text>
+						大功告成！\n猫猫狗狗已经填写成功！\n对小动物的爱从这里开始</text
+					>
+				</view>
 
-    <view class="submitB-footer">
-      <view class="nextStep" bindtap="nextStep"
-        >{{ currentStep==3?'完成':'下一步'}}
-      </view>
-    </view>
-  </view>
+				<view class="submitB-end">
+					<image
+						mode="widthFix"
+						src="https://drive.joia.cn/catdog/pic/morphis-earth-day-celebration.png" />
+				</view>
+			</view>
+		</view>
+
+		<view class="submitB-footer">
+			<view
+				class="nextStep"
+				bindtap="nextStep">
+				{{ currentStep==3?'完成':'下一步'}}
+			</view>
+		</view>
+	</view>
 </view>
+<dialog
+	isShowDialog="{{isShowDialog}}"
+	title="{{dialogInfo.title}}"
+	info="{{dialogInfo.info}}"></dialog>

@@ -5,13 +5,43 @@ Page({
     let temStepLock = parseInt(this.data.stepLock)
     let stepLock = temStepLock == 3 ? temStepLock : temStepLock + 1;
     if (step != 0 && step != 3 && step <= stepLock) {
-      //jiaoyangshuju
-      console.log("jiaoyang");
+      if (this.checkForm(step) == false) {
+        return
+      }
     }
     this.setData({
       currentStep: step + 1,
       stepLock: parseInt(stepLock)
     })
+  },
+  checkForm(step) {
+    console.log(step, this.data.formData);
+    if (step == 1) {
+      if (this.data.name == '' || this.data.type == -1) {
+        this.openDialog({
+          title: '请填写完整哦',
+          info: ''
+        })
+        return false;
+      }
+    } else {
+      if (this.data.foundPlace == '' || this.data.photos.length == 0) {
+        this.openDialog({
+          title: '请填写完整哦',
+          info: ''
+        })
+        return false;
+      }
+    }
+
+  },
+  submit() {
+    wx.navigateBack({
+      delta: 1
+    })
+    wx.navigateTo({
+      url: '/pages/submit/submit',
+    });
   },
   changeStep(e) {
     let step = Math.round(e.currentTarget.dataset.step)
@@ -24,13 +54,38 @@ Page({
   },
   chooseType(even) {
     this.setData({
-      ['formData.type']: Math.round(even.currentTarget.dataset.type)
+      type: Math.round(even.currentTarget.dataset.type)
     })
   },
   chooseStatus(even) {
     this.setData({
-      ['formData.status']: Math.round(even.currentTarget.dataset.status)
+      status: Math.round(even.currentTarget.dataset.status)
     })
+  },
+  openSubmitMore() {
+    //关闭当前页面前往下一个页面
+    wx.navigateBack({
+      delta: 1
+    })
+    wx.navigateTo({
+      url: '/pages/submit/submit',
+    });
+  },
+  openDialog(e) {
+    let value = e.detail;
+    if (e.type || e.type == "openDialog") {
+      value = e.detail
+    } else {
+      value = e
+    }
+    this.setData({
+      isShowDialog: true,
+      dialogInfo: {
+        title: value.title ? value.title : '出现了错误',
+        info: value.info ? value.info : ''
+      }
+    });
+
   },
   /**
    * 页面的初始数据
@@ -39,11 +94,16 @@ Page({
     currentStep: 0,
     isShowStep0: false,
     stepLock: 0,
-    formData: {
-      name: '',
-      type: -1,
-      status: -1,
-    }
+    name: '',
+    type: -1,
+    status: -1,
+    foundPlace: '',
+    photos: [],
+    dialogInfo: {
+      title: '出现问题了',
+      info: ''
+    },
+
   },
 
   /**

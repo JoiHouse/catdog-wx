@@ -1,0 +1,122 @@
+<view
+	class="commentDetail-wrapper"
+	bind:tap="closeDialog">
+	<view class="commentDetail">
+		<view
+			class="commentDetail-content"
+			style="bottom:{{inputHeight}}px"
+			bindblur="hideKeybord"
+			catchtap="stop">
+			<view>
+				<view class="commentDetail-header">
+					<text
+						class="iconfont icon-close"
+						bind:tap="closeDialog"
+						style="font-size: 1.5em">
+					</text>
+				</view>
+				<view class="commentDetail-body">
+					<view class="comment-list">
+						<view
+							class="detail-comment-item detail-card"
+							bindtap="detailDialogAcitve">
+							<view class="detail-comment-item-t">
+								<image src="{{rspData.user.photo}}" />
+								<view class="detail-comment-t-user">
+									<view> {{rspData.user.name}}</view>
+									<text> {{rspData.createdAt}}</text>
+								</view>
+							</view>
+							<view class="detail-comment-item-b">
+								<text class="detail-comment-b-text">{{rspData.content}} </text>
+								<view class="detail-comment-b-pic">
+									<view>
+										<image
+											src="https://source.unsplash.com/900x600/?nature,water,4" />
+									</view>
+									<view>
+										<image
+											src="https://source.unsplash.com/900x600/?nature,water,4" />
+									</view>
+									<view>
+										<image
+											src="https://source.unsplash.com/900x600/?nature,water,4" />
+									</view>
+								</view>
+							</view>
+							<view class="comment-item-fun">
+								<view>
+									<text class="iconfont icon-heart_outlined">
+										<text>123</text>
+									</text>
+									<text class="iconfont icon-comment">
+										<text>123</text>
+									</text>
+								</view>
+							</view>
+						</view>
+						<view class="divLine"> </view>
+					</view>
+
+					<view
+						class="comment-2"
+						wx:for="{{rspData.replies}}"
+						wx:for-index="index_1"
+						wx:key="index_1">
+						<view>
+							<view class="comment-2-user">
+								<image src="https://joia.cn/logo.webp" />
+								{{rspData.replies[index_1].user.name}}
+								<text class="iconfont icon-heart_outlined"
+									><text>123</text></text
+								>
+							</view>
+							<view class="comment-2-text">
+								<text>{{rspData.replies[index_1].content}}</text>
+							</view>
+							<view class="comment-2-time"
+								>{{rspData.replies[index_1].createdAt}}</view
+							>
+						</view>
+
+						<view class="comment-3">
+							<view
+								class="comment-3-item"
+								wx:for="{{rspData.replies[index_1].replies}}"
+								wx:for-index="index_2"
+								wx:key="index_2">
+								<text class="comment-3-user"
+									>{{rspData.replies[index_1].replies[index_2].user.name}}: </text
+								>
+								<text class="comment-3-text"
+									>{{rspData.replies[index_1].replies[index_2].content}}</text
+								>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="commentAdd">
+					<view>
+						<view class="commentAdd-input">
+							<textarea
+								adjustPosition="{{true}}"
+								auto-height="{{true}}"
+								show-confirm-bar="{{false}}"
+								bindinput="input"
+								placeholder="美好评论，温暖你我心灵"
+								cursor-spacing="{{50}}" />
+							<view
+								class="commentAdd-btn"
+								bindtap="submit">
+							</view>
+						</view>
+						<view
+							class="commentAdd-pic"
+							wx:if="{{type == 'pic'}}">
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

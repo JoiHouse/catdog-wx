@@ -1,76 +1,89 @@
 <page-meta
-  page-style="{{isShowLoginDialog ? 'overflow:hidden' : ''}}"
-></page-meta>
+	page-style="{{isShowLoginDialog ? 'overflow:hidden' : ''}}"></page-meta>
 
 <view class="container">
-  <view class="userInfo">
-    <view class="userInfo-content" bind:tap="userInfoChange">
-      <view class="userInfo-name">
-        <view wx:if="{{userInfo.isLogin}}"> {{userInfo.name}} </view>
-        <view wx:else> 请登录 </view>
-        <text wx:if="{{userInfo.isLogin}}">ID：{{userInfo.user_id}}</text>
-      </view>
-      <view class="userInfo-pic">
-        <image src="https://drive.joia.cn/catdog/pic/pb.jpg" />
-      </view>
-    </view>
-  </view>
-  <view class="userFunA userFun">
-    <view class="userFunA-itemList">
-      <view class="userFunA-item">
-        <view> {{userInfo.likeNum || '0'}} </view>
-        <text> 点赞 </text>
-      </view>
-      <view class="userFunA-item">
-        <view> {{userInfo.commentNum || '0'}}</view>
-        <text> 评论 </text>
-      </view>
-      <view class="userFunA-item">
-        <view> {{userInfo.view || '0'}} </view>
-        <text> 浏览 </text>
-      </view>
-    </view>
-  </view>
-  <view class="userFunB userFun">
-    <view class="userFunB-itemList">
-      <view class="userFunB-item">
-        <view>
-          <text> 登记\n猫猫狗狗 </text>
-          <view class="userFunB-icon">
-            <image src="https://drive.joia.cn/catdog/pic/dogColor.png" />
-          </view>
-        </view>
-      </view>
-      <view class="userFunB-item">
-        <view>
-          <text> 管理\n我的登记 </text>
-          <view class="userFunB-icon">
-            <image src="https://drive.joia.cn/catdog/pic/catColor.png" />
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class="userFunB userFun">
-    <view class="userFunB-itemList">
-      <view class="userFunB-item">
-        <view>
-          <view class="userFunB-icon" style="margin-left: 0;">
-            <text class="iconfont icon-msg"></text>
-          </view>
-          <view> 反馈 / 帮助 </view>
-        </view>
-      </view>
-      <view class="userFunB-item">
-        <view>
-          <view class="userFunB-icon" style="margin-left: 0;">
-            <text class="iconfont icon-about"></text>
-          </view>
-          <view> 关于我们 </view>
-        </view>
-      </view>
-    </view>
-  </view>
+	<view class="userInfo">
+		<view
+			class="userInfo-content"
+			bind:tap="userInfoChange">
+			<view class="userInfo-name">
+				<view wx:if="{{userInfo.isLogin}}"> {{userInfo.name}} </view>
+				<view wx:else> 请登录 </view>
+				<text wx:if="{{userInfo.isLogin}}">ID：{{userInfo.user_id}}</text>
+			</view>
+			<view class="userInfo-pic">
+				<image src="https://drive.joia.cn/catdog/pic/pb.jpg" />
+			</view>
+		</view>
+	</view>
+	<view class="userFunA userFun">
+		<view class="userFunA-itemList">
+			<view class="userFunA-item">
+				<view> {{userInfo.likeNum || '0'}} </view>
+				<text> 点赞 </text>
+			</view>
+			<view class="userFunA-item">
+				<view> {{userInfo.commentNum || '0'}}</view>
+				<text> 评论 </text>
+			</view>
+			<view class="userFunA-item">
+				<view> {{userInfo.view || '0'}} </view>
+				<text> 浏览 </text>
+			</view>
+		</view>
+	</view>
+	<view class="userFunB userFun">
+		<view class="userFunB-itemList">
+			<view
+				class="userFunB-item"
+				bindtap="openPage"
+				data-url="/pages/submitBySteps/submitBySteps">
+				<view>
+					<text> 登记\n猫猫狗狗 </text>
+					<view class="userFunB-icon">
+						<image src="https://drive.joia.cn/catdog/pic/dogColor.png" />
+					</view>
+				</view>
+			</view>
+			<view
+				class="userFunB-item"
+				bindtap="openPage"
+				data-url="/pages/myPost/myPost">
+				<view>
+					<text> 管理\n我的登记 </text>
+					<view class="userFunB-icon">
+						<image src="https://drive.joia.cn/catdog/pic/catColor.png" />
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="userFunB userFun">
+		<view class="userFunB-itemList">
+			<view class="userFunB-item">
+				<view>
+					<view
+						class="userFunB-icon"
+						style="margin-left: 0">
+						<text class="iconfont icon-msg"></text>
+					</view>
+					<view> 反馈 / 帮助 </view>
+				</view>
+			</view>
+			<view class="userFunB-item">
+				<view>
+					<view
+						class="userFunB-icon"
+						style="margin-left: 0">
+						<text class="iconfont icon-about"></text>
+					</view>
+					<view> 关于我们 </view>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>
-<login-dialog wx:if="{{isShowLoginDialog}}" bind:active="loginDialogAcitve">
+<login-dialog
+	wx:if="{{isShowLoginDialog}}"
+	bind:active="loginDialogAcitve">
 </login-dialog>

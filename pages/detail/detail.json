@@ -1,0 +1,9 @@
+{
+    
+    "usingComponents": {
+        "comment-detail": "../../components/comment/commentDetail/commentDetail",
+        "comment-add": "../../components/comment/commentAdd/commentAdd",
+        "dialog": "../../components/dialog/dialog"
+
+    }
+}

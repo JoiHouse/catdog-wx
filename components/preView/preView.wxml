@@ -1,13 +1,13 @@
 <view class="preView-item">
   <view class="preView-pic">
-    <image src="{{animal.photo_url}}" />
+    <image src="{{animal.photo[0]}}" />
   </view>
   <view class="preView-content">
     <view class="preView-name"> {{animal.name}} 
     </view>
     <view class="preView-tagList">
-      <view class="preView-tag" wx:for="{{animal.tag}}" wx:key="item">
-        {{item}}
+      <view class="preView-tag" wx:for="{{animal.tags}}" wx:key="item">
+        {{item.value}}
       </view>
     </view>
   </view>

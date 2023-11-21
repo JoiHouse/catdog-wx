@@ -1,0 +1,36 @@
+<view
+	class="commentAdd-wrapper"
+	bindtap="closeDialog">
+	<view class="commentAdd">
+		<view
+			class="commentAdd-content"
+			bindblur="hideKeybord"
+			adjustPosition="true"
+			catchtap="stop">
+			<view>
+				<view class="commentAdd-input">
+					<textarea
+						adjustPosition="{{true}}"
+						auto-height="{{true}}"
+						show-confirm-bar="{{false}}"
+						bindinput="input"
+						placeholder="美好评论，温暖你我心灵"
+						cursor-spacing="{{50}}"
+						focus="{{addCommentInputFocus}}"
+						auto-focus="{{true}}" />
+						<view class="preViewPicList">
+							
+						</view>
+					<view
+						class="commentAdd-btn"
+						bindtap="submit">
+					</view>
+				</view>
+				<view
+					class="commentAdd-pic"
+					wx:if="{{type == 'pic'}}">
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

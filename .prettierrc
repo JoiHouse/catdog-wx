@@ -1,16 +1,34 @@
 {
-    "overrides": [
-      {
-        "files": "*.wxml",
-        "options": {
-          "parser": "html"
-        }
-      },
-      {
-        "files": "*.wxss",
-        "options": {
-          "parser": "css"
-        }
+  "arrowParens": "always",
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "semi": true,
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "quoteProps": "as-needed",
+  "trailingComma": "all",
+  "singleAttributePerLine": true,
+  "htmlWhitespaceSensitivity": "css",
+  "vueIndentScriptAndStyle": true,
+  "proseWrap": "preserve",
+  "insertPragma": false,
+  "printWidth": 80,
+  "requirePragma": false,
+  "tabWidth": 2,
+  "useTabs": true,
+  "embeddedLanguageFormatting": "auto",
+  "overrides": [
+    {
+      "files": "*.wxml",
+      "options": {
+        "parser": "html"
       }
-    ]
-  }
+    },
+    {
+      "files": "*.wxss",
+      "options": {
+        "parser": "css"
+      }
+    }
+  ]
+}

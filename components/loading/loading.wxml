@@ -1,0 +1,6 @@
+<!-- loading -->
+<view class="loading">
+	<view class="loading-content">
+		<view class="loader"> </view>
+	</view>
+</view>

@@ -1,0 +1,23 @@
+<view class="myPost">
+	<view class="myPost-header">
+		<view class="myPost-header-layout">
+			<view class="header-picker">
+				<picker
+					mode="multiSelector"
+					bindchange="bindPickerChange"
+					value="{{picked}}"
+					range="{{pickerList}}">
+					<view class="picker-result"> {{pickerList[0][picked[0]] }} </view>
+				</picker>
+			</view>
+			<view class="header-input">
+				<input
+					type="text"
+					placeholder="搜索些什么" />
+			</view>
+			<view class="header-btn">
+				<view class="btn-round btn-search"> </view>
+			</view>
+		</view>
+	</view>
+</view>
