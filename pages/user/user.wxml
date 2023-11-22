@@ -7,9 +7,9 @@
 			class="userInfo-content"
 			bind:tap="userInfoChange">
 			<view class="userInfo-name">
-				<view wx:if="{{userInfo.isLogin}}"> {{userInfo.name}} </view>
+				<view wx:if="{{isLogin}}"> {{userInfo.name}} </view>
 				<view wx:else> 请登录 </view>
-				<text wx:if="{{userInfo.isLogin}}">ID：{{userInfo.user_id}}</text>
+				<text wx:if="{{isLogin}}">ID：{{userInfo.userId}}</text>
 			</view>
 			<view class="userInfo-pic">
 				<image src="https://drive.joia.cn/catdog/pic/pb.jpg" />
@@ -83,7 +83,44 @@
 		</view>
 	</view>
 </view>
+
+<view class="changeUser">
+	<view>
+		<view class="changeUser-content">
+			<view>
+				<view class="changeUser-photo" bindtap="changeP">
+					<image
+						src="{{userInfo.photo || 'https://drive.joia.cn/catdog/pic/pb.jpg'}}" />
+				</view>
+				<view class="changeUser-name">
+					<input
+						type="text"
+						value="{{userInfo.name}}"
+						placeholder="请输入昵称" />
+				</view>
+			</view>
+			<view class="changeUser-btns">
+				<view
+					class="changeUser-btn"
+					bind:tap="changeUser">
+					确定
+				</view>
+				<view
+					class="changeUser-btn"
+					bind:tap="changeUser"
+					style="background-color: #e9e7e7">
+					取消
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
 <login-dialog
 	wx:if="{{isShowLoginDialog}}"
-	bind:active="loginDialogAcitve">
+	bind:active="loginDialogAcitve"
+	bind:getuserinfo="getUserInfo">
 </login-dialog>
+<dialog
+	isShowDialog="{{isShowDialog}}"
+	title="{{dialogInfo.title}}"
+	info="{{dialogInfo.info}}"></dialog>

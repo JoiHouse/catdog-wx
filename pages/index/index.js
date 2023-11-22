@@ -22,7 +22,6 @@ Page({
       total: 0,
       rows: []
     },
-
     tem: {},
     searchKey: '',
   },
@@ -96,12 +95,12 @@ Page({
     that.loading()
     return new Promise((resolve, reject) => {
       wx.request({
-        url: 'http://10.150.4.120:7788/home?name=' + that.data.searchKey + '&pageNum=' + that.data.currentPage + '&pageSize=' + that.data.pageSize,
+        url: app.globalData.apiHost + '/home?name=' + that.data.searchKey + '&pageNum=' + that.data.currentPage + '&pageSize=' + that.data.pageSize,
         success: (res) => {
           that.loaded()
-          if (res.statusCode !== 200) {
+          if (res.data.code !== 200) {
             let log = res.data.msg || res.data.errMsg || res.data.error
-            this.openDialog({
+            that.openDialog({
               title: '加载失败',
               info: '请检查网络:' + log
             })
@@ -113,7 +112,7 @@ Page({
         },
         fail: (res) => {
           that.loaded()
-          this.openDialog({
+          that.openDialog({
             title: '加载失败',
             info: '请检查网络'
           })
@@ -127,11 +126,17 @@ Page({
     this.setData({
       previewItemWidth: pageWidth / 2 - 27
     })
-    this.fetchHome().then(data => {
-      this.setData({
-        animalInfo: data
+    this.fetchHome()
+      .then(data => {
+        if (data) {
+          this.setData({
+            animalInfo: data
+          })
+        }
       })
-    })
+      .catch(err => {
+        console.log(err)
+      })
 
   },
 

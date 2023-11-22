@@ -1,110 +1,173 @@
-
 .container {
-  background: #f1f1f2b2;
-  height: 100vh;
+	background: #f1f1f2b2;
+	height: 100vh;
 }
 .userInfo {
-  background: #f4cd40;
-  border-radius: 0 0 26px 26px;
+	background: #f4cd40;
+	border-radius: 0 0 26px 26px;
 }
 .userInfo-content {
-  padding: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	padding: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 .userInfo-name {
-  padding: 10px;
-  color: #fbfbfd;
+	padding: 10px;
+	color: #fbfbfd;
 }
 .userInfo-name > view {
-  padding-bottom: 3px;
-  font-size: 1.3em;
+	padding-bottom: 3px;
+	font-size: 1.3em;
 }
 .userInfo-name > text {
-  font-size: 0.9em;
+	font-size: 0.9em;
 }
 .userInfo-pic {
-  height: 66px;
-  width: 66px;
-  margin: 10px;
-  border-radius: 50%;
-  background-color: #d6d5d6;
-  overflow: hidden;
+	height: 66px;
+	width: 66px;
+	margin: 10px;
+	border-radius: 50%;
+	background-color: #d6d5d6;
+	overflow: hidden;
 }
 .userInfo-pic image {
-  height: 100%;
-  width: 100%;
+	height: 100%;
+	width: 100%;
 }
 .userFun {
-  width: calc(100% - 39px);
-  padding: 20px 0;
-  background: #fbfbfd;
-  border-radius: 8px;
-  margin: auto;
+	width: calc(100% - 39px);
+	padding: 20px 0;
+	background: #fbfbfd;
+	border-radius: 8px;
+	margin: auto;
 }
 .userFunA {
-  margin: -20px auto auto auto;
+	margin: -20px auto auto auto;
 }
 .userFunA-itemList {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
 }
 .userFunA-item {
-  width: 33.33%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+	width: 33.33%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
 }
-.userFunA-item >text{
-  font-size: .8em;
+.userFunA-item > text {
+	font-size: 0.8em;
 }
 .userFunB.userFun {
-  margin-top: 18px;
+	margin-top: 18px;
 }
 .userFunB-itemList {
-  display: flex;
-  gap: 8px;
+	display: flex;
+	gap: 8px;
 }
 .userFunB-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.1em;
-  line-height: 1.2;
-  width: 50%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 1.1em;
+	line-height: 1.2;
+	width: 50%;
 }
 .userFunB-item > view {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 75%;
-  gap: 8px;
-  padding: 8px 0 8px 18px;
-  font-size: .8em;
-  font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 75%;
+	gap: 8px;
+	padding: 8px 0 8px 18px;
+	font-size: 0.8em;
+	font-weight: 600;
 }
 .userFunB-item > text {
-  padding: 0 18px;
+	padding: 0 18px;
 }
-.userFunB-icon{
-  margin-right: 6px;
+.userFunB-icon {
+	margin-right: 6px;
 }
-.userFunB-icon > image{
-  height: 35px;
-  width: 35px;
+.userFunB-icon > image {
+	height: 35px;
+	width: 35px;
 }
 .icon-about:before {
-  content: "\e75b";
-  font-size: 1.39em;
-
+	content: "\e75b";
+	font-size: 1.39em;
 }
 
 .icon-msg:before {
-  content: "\e76b";
-  font-size: 1.3em;
-
+	content: "\e76b";
+	font-size: 1.3em;
+}
+.changeUser {
+	height: 100vh;
+	width: 100vw;
+	z-index: 99;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.2);
+	--lo-dialog-radius: 18px;
+	--lo-dialog-padding-a: 18px;
+}
+.changeUser > view {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.changeUser .changeUser-content {
+	width: 70%;
+	padding: 30px 20px 20px 20px;
+	border-radius: var(--lo-dialog-radius);
+	overflow: hidden;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	animation: popup 0.3s ease-in-out;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.changeUser-content > view {
+	width: 100%;
+	display: flex;
+}
+.changeUser-photo > image {
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin: 10px;
+}
+.changeUser-name{
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+.changeUser-name > input{
+  font-weight: 600;
+  width: 6em;
+}
+.changeUser-btns {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.changeUser-btn {
+	margin: auto;
+	width: 39%;
+	padding: 10px 5px;
+	font-size: 0.9em;
+	background: #3d8bea;
+	text-align: center;
+	font-weight: 600;
+	color: #fff;
+	border-radius: 10px;
 }

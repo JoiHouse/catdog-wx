@@ -25,10 +25,7 @@
 
 		<view class="detail-info detail-card">
 			<view class="detail-title-layout">
-				<view class="detail-title">
-					{{rspData.name}}
-					
-				</view>
+				<view class="detail-title"> {{rspData.name}} </view>
 			</view>
 
 			<view class="detail-shortInfo">
@@ -84,29 +81,27 @@
 			<view
 				class="detail-comment-item detail-card"
 				bindtap="detailDialogAcitve"
-				data-id="1"
-				>
+				wx:for="{{commentData}}"
+				wx:key="item"
+				data-id="{{item.id}}">
 				<view class="detail-comment-item-t">
-					<image src="https://joia.cn/logo.webp" />
+					<image src="{{item.user.photo}}" />
 					<view class="detail-comment-t-user">
-						<view> 小小</view>
-						<text> 9月21日</text>
+						<view> {{item.user.name}}</view>
+						<text> {{item.createdAt}}</text>
 					</view>
 				</view>
 				<view class="detail-comment-item-b">
-					<text class="detail-comment-b-text">这是测试评论 </text>
-					<view class="detail-comment-b-pic">
-						<view>
-							<image
-								src="https://source.unsplash.com/900x600/?nature,water,4" />
-						</view>
-						<view>
-							<image
-								src="https://source.unsplash.com/900x600/?nature,water,4" />
-						</view>
-						<view>
-							<image
-								src="https://source.unsplash.com/900x600/?nature,water,4" />
+					<text class="detail-comment-b-text">{{item.content}}</text>
+					<view
+						class="detail-comment-b-pic"
+						wx:if="{{item.photos.length>0}}">
+						<view
+							wx:for="{{item.photos}}"
+							wx:for-item="pic"
+							wx:key="pic"
+							wx:if="{{pic}}">
+							<image src="{{pic}}" />
 						</view>
 					</view>
 				</view>
@@ -121,51 +116,20 @@
 					</view>
 				</view>
 			</view>
-			<view class="detail-comment-item detail-card">
-				<view class="detail-comment-item-t">
-					<image src="https://joia.cn/logo.webp" />
-					<view class="detail-comment-t-user">
-						<view> 小小</view>
-						<text> 9月21日</text>
-					</view>
-				</view>
-				<view class="detail-comment-item-b">
-					<text class="detail-comment-b-text">这是测试评论 </text>
-					<view class="detail-comment-b-pic">
-						<view>
-							<image
-								src="https://source.unsplash.com/900x600/?nature,water,4" />
-						</view>
-						<view>
-							<image
-								src="https://source.unsplash.com/900x600/?nature,water,4" />
-						</view>
-						<view>
-							<image
-								src="https://source.unsplash.com/900x600/?nature,water,4" />
-						</view>
-					</view>
-				</view>
-				<view class="comment-item-fun">
-					<view> </view>
-					<view>
-						<text class="iconfont icon-comment"></text>
-						<text class="iconfont icon-heart_outlined"></text>
-					</view>
-				</view>
-			</view>
 		</view>
 	</view>
 </view>
 <comment-add
 	type="pic"
 	wx:if="{{isShowAddDialog}}"
+		postId="{{pageId}}"
 	keybordheight="{{keybordHeight}}"
 	bind:closeDialog="addDialogAcitve"></comment-add>
 <comment-detail
 	wx:if="{{isShowDetailDialog}}"
 	bind:closeDialog="detailDialogAcitve"
-	commentId="{{commentId}}"
-	>
+	postId="{{rspData.petId}}"
+	parentId="{{commentId}}"
+	commentId="{{commentId}}">
 </comment-detail>
 <loading wx:if="{{loading}}" />

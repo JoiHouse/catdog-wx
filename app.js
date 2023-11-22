@@ -3,7 +3,7 @@ App({
 
   getTimeDifferent(oldTime) {
     let newTime = new Date();
-    oldTime = new Date(oldTime);
+    oldTime = new Date(oldTime.replace(/-/g, "/"));
     let differentTime = (newTime - oldTime) / 1000;
     let days = parseInt(differentTime / 86400);
     let hours = parseInt(differentTime / 3600) - 24 * days;
@@ -53,5 +53,6 @@ App({
     token: null,
     userName: null,
     userAvatar: null,
+    apiHost: 'http://10.150.4.120:7788',
   }
 })

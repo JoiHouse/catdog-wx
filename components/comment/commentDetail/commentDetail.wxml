@@ -29,18 +29,14 @@
 							</view>
 							<view class="detail-comment-item-b">
 								<text class="detail-comment-b-text">{{rspData.content}} </text>
-								<view class="detail-comment-b-pic">
-									<view>
-										<image
-											src="https://source.unsplash.com/900x600/?nature,water,4" />
-									</view>
-									<view>
-										<image
-											src="https://source.unsplash.com/900x600/?nature,water,4" />
-									</view>
-									<view>
-										<image
-											src="https://source.unsplash.com/900x600/?nature,water,4" />
+								<view
+									class="detail-comment-b-pic"
+									wx:if="{{rspData.photos.length>0}}">
+									<view
+										wx:for="{{rspData.photos}}"
+										wx:key="index"
+										wx:if="{{item}}">
+										<image src="{{item}}" />
 									</view>
 								</view>
 							</view>
@@ -65,7 +61,7 @@
 						wx:key="index_1">
 						<view>
 							<view class="comment-2-user">
-								<image src="https://joia.cn/logo.webp" />
+								<image src="{{rspData.replies[index_1].user.photo}}" />
 								{{rspData.replies[index_1].user.name}}
 								<text class="iconfont icon-heart_outlined"
 									><text>123</text></text
@@ -79,15 +75,17 @@
 							>
 						</view>
 
-						<view class="comment-3">
+						<view
+							class="comment-3"
+							wx:if="{{rspData.replies[index_1].replies.length >0}}">
 							<view
 								class="comment-3-item"
 								wx:for="{{rspData.replies[index_1].replies}}"
 								wx:for-index="index_2"
 								wx:key="index_2">
 								<text class="comment-3-user"
-									>{{rspData.replies[index_1].replies[index_2].user.name}}: </text
-								>
+									>{{rspData.replies[index_1].replies[index_2].user.name}}:
+								</text>
 								<text class="comment-3-text"
 									>{{rspData.replies[index_1].replies[index_2].content}}</text
 								>
@@ -102,12 +100,12 @@
 								adjustPosition="{{true}}"
 								auto-height="{{true}}"
 								show-confirm-bar="{{false}}"
-								bindinput="input"
+								model:value="{{content}}"
 								placeholder="美好评论，温暖你我心灵"
 								cursor-spacing="{{50}}" />
 							<view
 								class="commentAdd-btn"
-								bindtap="submit">
+								bindtap="addComment">
 							</view>
 						</view>
 						<view
@@ -120,3 +118,7 @@
 		</view>
 	</view>
 </view>
+<dialog
+	isShowDialog="{{isShowDialog}}"
+	title="{{dialogInfo.title}}"
+	info="{{dialogInfo.info}}"></dialog>

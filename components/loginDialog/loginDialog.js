@@ -1,9 +1,7 @@
-// components/loginDialog/loginDialog.js
+const app = getApp()
 Component({
 
-  /**
-   * 组件的属性列表
-   */
+
   properties: {
 
   },
@@ -38,6 +36,29 @@ Component({
       });
       this.closeDialog()
     },
+    updateUserInfo() {
+      wx.getUserInfo({
+        success(res) {
+          console.log(res)
+          wx.setStorageSync('userInfo', res.userInfo)
+        }
+      })
+
+    },
+    fetchUserInfo() {
+      let that = this
+      wx.getStorage({
+        key: 'userInfo',
+        success(res) {
+          console.log(res)
+          if (res.data) {
+            that.triggerEvent('active', {
+              userInfo: res.data
+            })
+          }
+        }
+      })
+    },
     loginWithWx() {
       let that = this
       that.loading()
@@ -60,7 +81,7 @@ Component({
     fetchLogin(code) {
       let that = this
       wx.request({
-        url: 'http://10.150.4.76:7788/wxLogin',
+        url: app.globalData.apiHost + '/wxLogin',
         method: 'POST',
         data: {
           code: code
@@ -69,6 +90,7 @@ Component({
           console.log(res.data)
           if (res.data.code == 200) {
             wx.setStorageSync('token', res.data.data.token)
+            that.triggerEvent('getuserinfo', {})
             that.closeDialog()
           }
         },

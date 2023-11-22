@@ -12,25 +12,40 @@
 					<textarea
 						adjustPosition="{{true}}"
 						auto-height="{{true}}"
+						model:value="{{content}}"
 						show-confirm-bar="{{false}}"
 						bindinput="input"
 						placeholder="美好评论，温暖你我心灵"
 						cursor-spacing="{{50}}"
 						focus="{{addCommentInputFocus}}"
 						auto-focus="{{true}}" />
-						<view class="preViewPicList">
-							
-						</view>
+					<view class="preViewPicList"> </view>
 					<view
 						class="commentAdd-btn"
-						bindtap="submit">
+						bindtap="addComment">
 					</view>
 				</view>
 				<view
 					class="commentAdd-pic"
+					bindtap="addPic"
 					wx:if="{{type == 'pic'}}">
+				</view>
+			</view>
+			<view
+				wx:if="{{imgs.length > 0}}"
+				class="commentAdd-pics">
+				<view
+					class="commentAdd-pics-item"
+					wx:for="{{imgs}}"
+					wx:key="item"
+					bindtap="delTemPic">
+					<image src="{{item}}" />
 				</view>
 			</view>
 		</view>
 	</view>
 </view>
+<dialog
+	isShowDialog="{{isShowDialog}}"
+	title="{{dialogInfo.title}}"
+	info="{{dialogInfo.info}}"></dialog>

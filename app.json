@@ -21,5 +21,9 @@
   "usingComponents": {
     "dialog": "../../components/dialog/dialog",
     "loading": "../../components/loading/loading"
+  },
+  "networkTimeout": {
+    "request": 5000,
+    "downloadFile": 10000
   }
 }

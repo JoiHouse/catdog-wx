@@ -4,5 +4,6 @@
     "preview": "../../components/preView/preView",
     "dialog": "../../components/dialog/dialog",
     "loading": "../../components/loading/loading"
-  }
+  },
+  "enablePullDownRefresh": true
 }
