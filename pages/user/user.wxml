@@ -12,7 +12,7 @@
 				<text wx:if="{{isLogin}}">ID：{{userInfo.userId}}</text>
 			</view>
 			<view class="userInfo-pic">
-				<image src="https://drive.joia.cn/catdog/pic/pb.jpg" />
+				<image src="{{userInfo.photo}}" />
 			</view>
 		</view>
 	</view>
@@ -84,30 +84,38 @@
 	</view>
 </view>
 
-<view class="changeUser">
+<view
+	class="changeUser"
+	wx:if="{{isShowChangeUser}}">
 	<view>
 		<view class="changeUser-content">
 			<view>
-				<view class="changeUser-photo" bindtap="changeP">
-					<image
-						src="{{userInfo.photo || 'https://drive.joia.cn/catdog/pic/pb.jpg'}}" />
+				<view class="changeUser-user">
+					<view
+						class="changeUser-photo"
+						bindtap="changePhoto">
+						<image
+							src="{{temUserInfo.photo || 'https://drive.joia.cn/catdog/pic/pb.jpg'}}" />
+					</view>
+					<view class="changeUser-name">
+						<input
+							type="text"
+							model:value="{{temName}}"
+							placeholder="请输入昵称" />
+					</view>
 				</view>
-				<view class="changeUser-name">
-					<input
-						type="text"
-						value="{{userInfo.name}}"
-						placeholder="请输入昵称" />
-				</view>
+				<view class="changeUser-wx" bindtap="changeByWx"> 使用微信头像及昵称 </view>
 			</view>
+
 			<view class="changeUser-btns">
 				<view
 					class="changeUser-btn"
-					bind:tap="changeUser">
+					bind:tap="fetchChangeUser">
 					确定
 				</view>
 				<view
 					class="changeUser-btn"
-					bind:tap="changeUser"
+					bind:tap="changeUserActive"
 					style="background-color: #e9e7e7">
 					取消
 				</view>

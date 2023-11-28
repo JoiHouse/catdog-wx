@@ -2,7 +2,6 @@
     "navigationBarTitleText": "登记猫猫狗狗",
     "usingComponents": {
         "add-tag":"./components/AddTag/AddTag",
-        "upload-pic":"../../components/uploadPic/uploadPic",
         "dialog":"../../components/dialog/dialog"
     }
 }

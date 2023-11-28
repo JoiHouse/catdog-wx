@@ -28,7 +28,6 @@
 	width: 66px;
 	margin: 10px;
 	border-radius: 50%;
-	background-color: #d6d5d6;
 	overflow: hidden;
 }
 .userInfo-pic image {
@@ -137,7 +136,21 @@
 }
 .changeUser-content > view {
 	width: 100%;
+}
+.changeUser-content .changeUser-user {
+	width: 100%;
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.changeUser-wx{
+	width: 90%;
+	padding: 10px 0;
+	border-radius: 8px;
+	font-size: .8em;
+	margin: auto;
+	text-align: center;
+	background-color: #f1f1f2b2;
 }
 .changeUser-photo > image {
 	height: 60px;
@@ -146,14 +159,14 @@
 	overflow: hidden;
 	margin: 10px;
 }
-.changeUser-name{
-  display: flex;
-  align-items: center;
-  padding: 20px;
+.changeUser-name {
+	display: flex;
+	align-items: center;
+	padding: 20px;
 }
-.changeUser-name > input{
-  font-weight: 600;
-  width: 6em;
+.changeUser-name > input {
+	font-weight: 600;
+	width: 6em;
 }
 .changeUser-btns {
 	display: flex;

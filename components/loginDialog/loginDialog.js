@@ -1,21 +1,9 @@
 const app = getApp()
+const re = require('../../utils/request.js')
 Component({
-
-
-  properties: {
-
-  },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
     loading: false,
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
     loading() {
       this.setData({
@@ -30,34 +18,13 @@ Component({
     closeDialog: function (even) {
       this.triggerEvent('active', {})
     },
-    openMailLogin: function () {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      });
-      this.closeDialog()
-    },
     updateUserInfo() {
       wx.getUserInfo({
         success(res) {
-          console.log(res)
           wx.setStorageSync('userInfo', res.userInfo)
         }
       })
 
-    },
-    fetchUserInfo() {
-      let that = this
-      wx.getStorage({
-        key: 'userInfo',
-        success(res) {
-          console.log(res)
-          if (res.data) {
-            that.triggerEvent('active', {
-              userInfo: res.data
-            })
-          }
-        }
-      })
     },
     loginWithWx() {
       let that = this
@@ -80,30 +47,29 @@ Component({
     },
     fetchLogin(code) {
       let that = this
-      wx.request({
-        url: app.globalData.apiHost + '/wxLogin',
+      re({
+        url: '/wxLogin',
         method: 'POST',
         data: {
           code: code
-        },
-        success(res) {
-          console.log(res.data)
-          if (res.data.code == 200) {
-            wx.setStorageSync('token', res.data.data.token)
-            that.triggerEvent('getuserinfo', {})
-            that.closeDialog()
-          }
-        },
-        fail(res) {
-          that.openDialog({
-            title: '登录失败',
-            info: res.errMsg
-          })
-        },
-        complete() {
-          that.loaded()
         }
       })
+      .then(res => {
+        if (res.code === 200) {
+          wx.setStorageSync('token', res.data.token)
+          that.triggerEvent('getuserinfo', {})
+          that.closeDialog()
+        }
+      })
+      .catch(err => {
+        that.openDialog({
+          title: '登录失败'
+        })
+      })
+      .finally(() => {
+        that.loaded()
+      })
+
     },
     openDialog(e) {
       let value = e.detail;

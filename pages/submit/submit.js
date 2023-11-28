@@ -1,10 +1,12 @@
-// pages/submit/submit.js
+const re = require('../../utils/request.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    itemWidth: (wx.getSystemInfoSync().windowWidth - 140) / 3,
     tagItemWidth: 0,
     addValue: "",
     isShowAdd: false,
@@ -13,12 +15,13 @@ Page({
       title: '出现问题了',
       info: ''
     },
-    formData: {
-      name: '',
-      sex: -1,
-      age: '',
-      type: -1
-    },
+    name: '',
+    sex: -1,
+    age: '',
+    type: -1,
+    status: -1,
+    foundPlace: '',
+
     tagList: [
       {
         value: '疫苗',
@@ -40,14 +43,9 @@ Page({
     tagDiyList: [],
     picList: []
   },
-  chooseSex(even) {
-    this.setData({
-      ['formData.sex']: parseInt(even.currentTarget.dataset.sex)
-    })
-  },
+
   chooseTag(even) {
     let status = this.data.tagList[even.currentTarget.dataset.tag].status ? false : true;
-
     this.setData({
       ['tagList[' + even.currentTarget.dataset.tag + '].status']: status
     })
@@ -62,9 +60,11 @@ Page({
       ['tagList[' + length + '].value']: value
     })
   },
-  chooseType(even) {
+  chooseType(e) {
+    let type = e.currentTarget.dataset.type;
+    let value = e.currentTarget.dataset.value;
     this.setData({
-      ['formData.type']: parseInt(even.currentTarget.dataset.type)
+      [type]: parseInt(value)
     })
   },
   dialogActive() {
@@ -93,111 +93,164 @@ Page({
   },
   uploadInfo() {
     if (this.checkInfo()) {
-      // let tagList = this.data.tagList;
-      // let tagDiyList = this.data.tagDiyList;
-      // let picList = this.data.picList;
-      // let formData = this.data.formData;
-      // let tag = [];
-      // for (i = 0; i < tagList.length; i++) {
-      //   if (tagList[i].status) {
-      //     tag.push(tagList[i].value)
-      //   }
-      // }
-      // formData.tag = tag;
-      // formData.tagDiy = tagDiyList;
-      // formData.pic = picList;
-      // wx.request({
-      //   url: 'https://www.xinqianqian.top/api/addPet',
-      //   data: formData,
-      //   method: 'POST',
-      //   success: function (res) {
-      //     console.log(res)
-      //   }
-      // })
+      this.fetchSubmit()
     }
   },
   checkInfo() {
-    if (this.data.formData.name == '' || this.data.formData.sex == -1 || this.data.formData.age == '' || this.data.formData.type == -1 || this.data.picList.length == 0) {
+    if (this.data.foundPlace == '' || this.data.sex == -1 || this.data.age == '' || this.data.type == -1) {
       this.openDialog({
         title: '信息得都填哦'
       })
       return false
-    } else {
-      let isHas = false
-      for (i = 0; i < this.data.tagList.length; i++) {
-        if (this.data.tagList[i].status) {
-          isHas = true
-        }
-      }
-      if (this.data.tagDiyList.length > 0) {
+    }
+    if (this.data.picList.length == 0) {
+      this.openDialog({
+        title: '至少上传一张图片哦'
+      })
+      return false
+    }
+
+
+    let isHas = false
+    for (let i = 0; i < this.data.tagList.length; i++) {
+      if (this.data.tagList[i].status) {
         isHas = true
       }
-      if (!isHas) {
-        this.openDialog({
-          title: '至少选择一个标签哦'
-        })
-        return false
-      }
     }
+    if (this.data.tagDiyList.length > 0) {
+      isHas = true
+    }
+    if (!isHas) {
+      this.openDialog({
+        title: '至少选择一个标签哦'
+      })
+      return false
+    }
+
     return true
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-    let pageWidth = wx.getSystemInfoSync().windowWidth;
-    this.setData({
-      tagItemWidth: pageWidth / 2 - 55
+  addPic() {
+    let that = this;
+    let temImg = that.data.picList;
+    if (temImg.length == 3) {
+      that.openDialog({
+        title: '最多只能上传3张图片哦'
+      })
+      return
+    }
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        let tempFilePaths = res.tempFilePaths;
+        console.log("数组：" + tempFilePaths);
+        temImg.push(tempFilePaths[0]);
+        that.setData({
+          picList: temImg
+        });
+
+      }
+    });
+  },
+  delTemPic(e) {
+    let that = this;
+    let temImg = that.data.picList;
+    let index = e.currentTarget.dataset.index;
+    temImg.splice(index, 1);
+    that.setData({
+      picList: temImg
+    });
+  },
+  fetchUploadPic(picFile) {
+    return new Promise((resolve, reject) => {
+      wx.uploadFile({
+        url: app.globalData.apiHost + "/Pictures",
+        filePath: picFile,
+        name: "file",
+        header: {
+          "Content-Type": "multipart/form-data",
+          "token": wx.getStorageSync('token')
+        },
+        formData: {
+          "file": picFile,
+        },
+        success: function (res) {
+          if (res.statusCode === 401) {
+            that.openDialog({
+              isShowDialog: true,
+              title: '登录失效'
+            })
+            navigator.replace({
+              url: '/pages/user/user',
+            })
+            return
+          }
+          if (res.statusCode !== 200) {
+            that.openDialog({
+              title: '加载失败',
+              info: '请检查网络'
+            })
+            reject(false)
+          } else {
+            let url = JSON.parse(res.data).data;
+            resolve(url)
+          }
+
+        }
+      })
+    })
+  },
+  async fetchSubmit() {
+    let that = this;
+    let temPic = []
+    for (let i = 0; i < that.data.picList.length; i++) {
+      await that.fetchUploadPic(that.data.picList[i]).then(res => {
+        temPic.push(res)
+      })
+    }
+    re({
+      url: '/modify',
+      method: 'POST',
+      data: {
+        name: that.data.name,
+        sex: that.data.sex,
+        age: that.data.age,
+        type: that.data.type,
+        status: that.data.status,
+        foundPlace: that.data.foundPlace,
+        tags: that.data.tagList,
+        photo: temPic
+      }
+    }).then(res => {
+      if (res.code == 200) {
+        that.openDialog({
+          title: '提交成功',
+          info: '感谢您的参与，我们会尽快审核您的信息，请耐心等待哦'
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 2000)
+      }
+    }).catch(err => {
+      that.openDialog({
+        title: '出现了错误',
+        info: err
+      })
     })
   },
 
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  onLoad(options) {
+    console.log(options);
+    let pageWidth = wx.getSystemInfoSync().windowWidth;
+    this.setData({
+      tagItemWidth: pageWidth / 2 - 55,
+      foundPlace: options.foundPlace || '',
+      name: options.name || '',
+      status: parseInt(options.status) || -1,
+      type: parseInt(options.type) || -1,
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
 })

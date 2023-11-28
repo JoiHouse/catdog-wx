@@ -79,30 +79,6 @@
 							</view>
 						</view>
 					</view>
-
-					<!-- <view class="submitB-form"> -->
-					<!-- <text>标签</text> -->
-					<!-- <view class="submitB-tags"> -->
-					<!-- <view -->
-					<!-- wx:for="{{tagList}}" -->
-					<!-- wx:key="item" -->
-					<!-- class="submiBt-radio man {{item.status?'active':''}}" -->
-					<!-- bindtap="chooseTag" -->
-					<!-- data-tag="{{index}}" -->
-					<!-- style="width:{{tagItemWidth}}px" -->
-					<!-- > -->
-					<!-- {{item.value}} -->
-					<!-- </view> -->
-					<!--  -->
-					<!-- <view -->
-					<!-- class="submitB-radio submitB-add" -->
-					<!-- bindtap="dialogActive" -->
-					<!-- style="width:{{tagItemWidth}}px" -->
-					<!-- > -->
-					<!-- 添加 + -->
-					<!-- </view> -->
-					<!-- </view> -->
-					<!-- </view> -->
 				</view>
 			</view>
 
@@ -143,7 +119,24 @@
 					</view>
 					<view class="submitB-form">
 						<text>图片</text>
-						<upload-pic> </upload-pic>
+						<view class="upload-pic">
+							<view class="upload-pic-list">
+								<view
+									class="upload-pic-item"
+									wx:for="{{photos}}"
+									wx:key="item"
+									data-index="{{index}}"
+									bindtap="delTemPic"
+									style="width:{{itemWidth}}px;height:{{itemWidth}}px">
+									<image src="{{item}}" />
+								</view>
+								<view
+									class="upload-pic-item upload-pic-btn"
+									bindtap="addPic"
+									style="width:{{itemWidth}}px;height:{{itemWidth}}px">
+								</view>
+							</view>
+						</view>
 					</view>
 					<view class="submitB-form">
 						<view

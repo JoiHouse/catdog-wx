@@ -155,6 +155,12 @@
 	content: "\e75a";
 }
 
+.icon-heart {
+	color: #e56161 !important;
+}
+.icon-like {
+	color: #e56161 !important;
+}
 .icon-heart:before {
 	content: "\e75c";
 }

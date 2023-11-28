@@ -2,7 +2,6 @@
   "navigationBarBackgroundColor": "#f4f5fa",
   "navigationBarTitleText": "提交猫猫狗狗",
   "usingComponents": {
-    "upload-pic": "../../components/uploadPic/uploadPic",
     "dialog": "../../components/dialog/dialog"
   }
 }

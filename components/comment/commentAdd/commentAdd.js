@@ -1,22 +1,20 @@
 const app = getApp()
+const re = require('../../../utils/request.js')
+
 Component({
-
-
   properties: {
     type: {
       type: String,
       value: ''
-    },
-    parentId: {
-      type: Number,
-      value: 0
     },
     postId: {
       type: Number,
       value: 0
     },
   },
-
+  lifetimes(){
+    
+  },
   data: {
     addCommentInputFocus: true,
     content: '',
@@ -50,7 +48,6 @@ Component({
         sourceType: ['album', 'camera'],
         success: function (res) {
           let tempFilePaths = res.tempFilePaths;
-          console.log("数组：" + tempFilePaths);
           temImg.push(tempFilePaths[0]);
           that.setData({
             imgs: temImg
@@ -108,54 +105,41 @@ Component({
     },
     fetchAdd(pics) {
       let that = this;
-      console.log(pics);
-      return new Promise((resolve, reject) => {
-        wx.request({
-          url: app.globalData.apiHost + "/addComment",
-          method: 'POST',
-          header: {
-            'content-type': 'application/json',
-            "token": wx.getStorageSync('token')
-          },
-          data: {
-            "content": that.data.content,
-            "detail": that.properties.postId,
-            "parentId": that.properties.parentId || '',
-            "photo": pics || [],
-          },
-          success: (res) => {
-            if (res.data.code === 401) {
-              that.openDialog({
-                isShowDialog: true,
-                title: '登录失效'
-              })
-              setTimeout(() => {
-                wx.navigateTo({
-                  url: '/pages/user/user',
-                });
-              }, 2000)
+      re({
+        url: "/addComment",
+        method: 'POST',
+        data: {
+          "content": that.data.content,
+          "detail": that.properties.postId,
+          "parentId":  '',
+          "photo": pics || [],
+        },
 
-              return
-            }
-            if (res.data.code !== 200) {
-              let log = res.data.msg || res.data.errMsg || res.data.error
-              that.openDialog({
-                title: '加载失败',
-                info: '请检查网络:' + log
-              })
-              reject(res)
-            } else {
-              resolve(res.data.data)
-            }
-          },
-          fail: (res) => {
-            that.openDialog({
-              title: '评论失败',
-              info: '请检查网络:' + res
-            })
+      }).then((res) => {
+        that.setData({
+          isShowDialog: true,
+          dialogInfo: {
+            title: '评论成功'
+          }
+        })
+        setTimeout(function () {
+          that.triggerEvent('closeDialog', {})
+        }, 1000)
+        console.log(res.data.id, that.properties.parentId);
+        that.triggerEvent('addComment', {
+          newId: res.data.id,
+          content: that.data.content,
+          photos: pics || [],
+        })
+      }).catch((res) => {
+        that.setData({
+          isShowDialog: true,
+          dialogInfo: {
+            title: '评论失败'
           }
         })
       })
+
     },
     async addComment() {
       let that = this
@@ -197,25 +181,8 @@ Component({
 
         }
 
-        console.log(upArr);
-        await that.fetchAdd(upArr)
-          .then((res) => {
-            that.setData({
-              isShowDialog: true,
-              dialogInfo: {
-                title: '评论成功'
-              }
-            })
-            setTimeout(function () {
-              that.triggerEvent('closeDialog', {})
-            }, 1000)
-            that.triggerEvent('addComment', {
-              commentId: res.commentId
-            })
-          })
-          .catch((res) => {
-            console.log(res)
-          })
+        that.fetchAdd(upArr)
+
       }
     },
     openDialog(e) {

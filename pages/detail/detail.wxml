@@ -63,8 +63,11 @@
 					<text>发布</text>
 				</view>
 				<view class="detail-btns">
-					<text class="iconfont icon-heart_outlined">
-						<text> {{rspData.likeNum>0?rspData.likeNum:' '}}</text>
+					<text
+						class="iconfont {{rspData.isLike?'icon-heart':'icon-heart_outlined'}}"
+						bindtap="likeItem"
+						data-post="{{rspData.petId}}">
+						<text> {{rspData.likeCount>0?rspData.likeCount:''}}</text>
 					</text>
 					<text class="iconfont icon-share"></text>
 				</view>
@@ -107,11 +110,15 @@
 				</view>
 				<view class="comment-item-fun">
 					<view>
-						<text class="iconfont icon-heart_outlined">
-							<text>123</text>
+						<text
+							class="iconfont {{item.isLike?'icon-heart':'icon-heart_outlined'}}"
+							catchtap="likeItem"
+							tapstop
+							data-comment="{{item.id}}">
+							<text>{{item.likeCount>0?item.likeCount:''}}</text>
 						</text>
 						<text class="iconfont icon-comment">
-							<text>123</text>
+							<text>{{item.commentsCount>0?item.commentsCount:''}}</text>
 						</text>
 					</view>
 				</view>
@@ -122,8 +129,9 @@
 <comment-add
 	type="pic"
 	wx:if="{{isShowAddDialog}}"
-		postId="{{pageId}}"
+	postId="{{pageId}}"
 	keybordheight="{{keybordHeight}}"
+	bind:addComment="addComment"
 	bind:closeDialog="addDialogAcitve"></comment-add>
 <comment-detail
 	wx:if="{{isShowDetailDialog}}"
@@ -132,4 +140,9 @@
 	parentId="{{commentId}}"
 	commentId="{{commentId}}">
 </comment-detail>
+<loading wx:if="{{loading}}" />
+<dialog
+	isShowDialog="{{isShowDialog}}"
+	title="{{dialogInfo.title}}"
+	info="{{dialogInfo.info}}"></dialog>
 <loading wx:if="{{loading}}" />

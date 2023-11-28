@@ -48,11 +48,15 @@
 .icon-heart:before {
 	content: "\e75c";
 }
-
+.icon-heart {
+	color: #e56161 !important;
+}
 .icon-heart_outlined:before {
 	content: "\e75d";
 }
-
+.icon-like {
+	color: #e56161 !important;
+}
 .icon-like:before {
 	content: "\e60d";
 }

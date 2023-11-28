@@ -53,6 +53,7 @@ App({
     token: null,
     userName: null,
     userAvatar: null,
-    apiHost: 'http://10.150.4.120:7788',
+    // apiHost: 'https://api.joia.cn',
+    apiHost:'http://10.150.5.77:7788'
   }
 })

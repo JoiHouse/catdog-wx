@@ -1,4 +1,5 @@
-// pages/submitBySteps/submitBySteps.js
+const re = require('../../utils/request.js')
+const app = getApp()
 Page({
   nextStep() {
     let step = parseInt(this.data.currentStep);
@@ -9,13 +10,16 @@ Page({
         return
       }
     }
+    if (step == 3) {
+      this.submit();
+      return;
+    }
     this.setData({
       currentStep: step + 1,
       stepLock: parseInt(stepLock)
     })
   },
   checkForm(step) {
-    console.log(step, this.data.formData);
     if (step == 1) {
       if (this.data.name == '' || this.data.type == -1) {
         this.openDialog({
@@ -35,13 +39,86 @@ Page({
     }
 
   },
-  submit() {
-    wx.navigateBack({
-      delta: 1
+  fetchUploadPic(picFile) {
+    return new Promise((resolve, reject) => {
+      wx.uploadFile({
+        url: app.globalData.apiHost + "/Pictures",
+        filePath: picFile,
+        name: "file",
+        header: {
+          "Content-Type": "multipart/form-data",
+          "token": wx.getStorageSync('token')
+        },
+        formData: {
+          "file": picFile,
+        },
+        success: function (res) {
+          if (res.statusCode === 401) {
+            that.openDialog({
+              isShowDialog: true,
+              title: '登录失效'
+            })
+            navigator.replace({
+              url: '/pages/user/user',
+            })
+            return
+          }
+          if (res.statusCode !== 200) {
+            that.openDialog({
+              title: '加载失败',
+              info: '请检查网络'
+            })
+            reject(false)
+          } else {
+            let url = JSON.parse(res.data).data;
+            resolve(url)
+          }
+
+        }
+      })
     })
-    wx.navigateTo({
-      url: '/pages/submit/submit',
-    });
+  },
+
+  async submit() {
+    let that = this;
+    let temImgs = [];
+    for (let i = 0; i < this.data.photos.length; i++) {
+      await this.fetchUploadPic(this.data.photos[i]).then(res => {
+        if (res) {
+          temImgs.push(res)
+        }
+      })
+    }
+    re({
+      url: '/modify',
+      method: 'POST',
+      data: {
+        name: that.data.name,
+        type: that.data.type,
+        status: that.data.status,
+        foundPlace: that.data.foundPlace,
+        photo: temImgs,
+        tags: []
+      },
+
+    }).then(res => {
+      if (res.code == 200) {
+        that.openDialog({
+          title: '提交成功',
+          info: '感谢您的参与，我们会尽快审核您的信息，请耐心等待哦'
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 2000)
+      }
+    }).catch(err => {
+      that.openDialog({
+        title: '提交失败',
+        info: err
+      })
+    })
   },
   changeStep(e) {
     let step = Math.round(e.currentTarget.dataset.step)
@@ -68,7 +145,7 @@ Page({
       delta: 1
     })
     wx.navigateTo({
-      url: '/pages/submit/submit',
+      url: '/pages/submit/submit?name=' + this.data.name + '&type=' + this.data.type + '&status=' + this.data.status + '&foundPlace=' + this.data.foundPlace + '&photos=' + this.data.photos,
     });
   },
   openDialog(e) {
@@ -87,9 +164,37 @@ Page({
     });
 
   },
-  /**
-   * 页面的初始数据
-   */
+  addPic() {
+    let that = this;
+    let temImg = that.data.photos;
+    if (temImg.length == 3) {
+      that.openDialog({
+        title: '最多只能上传3张图片哦'
+      })
+      return
+    }
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        let tempFilePaths = res.tempFilePaths;
+        console.log("数组：" + tempFilePaths);
+        temImg.push(tempFilePaths[0]);
+        that.setData({
+          photos: temImg
+        });
+      }
+    });
+  },
+  delTemPic(e) {
+    let that = this;
+    let temImg = that.data.photos;
+    let index = e.currentTarget.dataset.index;
+    temImg.splice(index, 1);
+    that.setData({
+      photos: temImg
+    });
+  },
   data: {
     currentStep: 0,
     isShowStep0: false,
@@ -99,16 +204,13 @@ Page({
     status: -1,
     foundPlace: '',
     photos: [],
+    itemWidth: (wx.getSystemInfoSync().windowWidth - 140) / 3,
     dialogInfo: {
       title: '出现问题了',
       info: ''
     },
 
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
     setTimeout(() => {
       this.setData({
@@ -117,52 +219,4 @@ Page({
     }, 200)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
 })

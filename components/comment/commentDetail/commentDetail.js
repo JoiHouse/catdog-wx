@@ -1,5 +1,5 @@
 const app = getApp()
-
+const re = require('../../../utils/request.js')
 Component({
   properties: {
     parentId: {
@@ -14,7 +14,9 @@ Component({
 
   data: {
     ifFullScreen: true,
-    rspData: {},
+    isFocusInput: false,
+    rspData: {
+    },
     isShowDialog: false,
     content: '',
     objId: 0,
@@ -26,10 +28,10 @@ Component({
 
   lifetimes: {
     attached() {
-      this.fetchComment()
       this.setData({
-        objId: this.properties.postId
+        objId: this.properties.parentId
       })
+      this.fetchComment()
     }
   },
   methods: {
@@ -41,57 +43,32 @@ Component({
       this.triggerEvent('closeDialog', {})
     },
     loadData() {
-
     },
     fetchAdd() {
       let that = this;
-      return new Promise((resolve, reject) => {
-        wx.request({
-          url: app.globalData.apiHost + "/addComment",
-          method: 'POST',
-          header: {
-            'content-type': 'application/json',
-            "token": wx.getStorageSync('token')
-          },
-          data: {
-            "content": that.data.content,
-            "detail": that.properties.postId,
-            "parentId": that.properties.parentId,
-            "photo": [],
-          },
-          success: (res) => {
-            if (res.data.code === 401) {
-              that.openDialog({
-                isShowDialog: true,
-                title: '登录失效'
-              })
-              setTimeout(() => {
-                wx.navigateTo({
-                  url: '/pages/user/user',
-                });
-              }, 2000)
-
-              return
-            }
-            if (res.data.code !== 200) {
-              let log = res.data.msg || res.data.errMsg || res.data.error
-              that.openDialog({
-                title: '加载失败',
-                info: '请检查网络:' + log
-              })
-              reject(res)
-            } else {
-              resolve(res.data.data)
-            }
-          },
-          fail: (res) => {
-            that.openDialog({
-              title: '评论失败',
-              info: '请检查网络:' + res
-            })
-          }
-        })
+      re({
+        url: "/addComment", method: "POST",
+        data: {
+          "content": that.data.content,
+          "detail": that.properties.postId,
+          "parentId": that.data.objId,
+          "photo": []
+        }
       })
+        .then((res) => {
+          if (res.code == 200) {
+            that.setData({
+              isShowDialog: true,
+              dialogInfo: {
+                title: '评论成功'
+              }
+            })
+            that.addNewCommentItem(res.data.id, that.properties.parentId)
+          }
+        }).catch((res) => {
+          console.log(res)
+        })
+
     },
     async addComment() {
       let that = this
@@ -113,47 +90,22 @@ Component({
         })
         return
       } else {
-        await that.fetchAdd()
-          .then((res) => {
-            that.setData({
-              isShowDialog: true,
-              dialogInfo: {
-                title: '评论成功'
-              }
-            })
-            setTimeout(function () {
-              that.triggerEvent('closeDialog', {})
-            }, 1000)
-            that.triggerEvent('addComment', {
-              commentId: res.commentId
-            })
-          })
-          .catch((res) => {
-            console.log(res)
-          })
+        that.fetchAdd()
       }
     },
     fetchComment() {
       let that = this
-      wx.request({
-        url: app.globalData.apiHost + '/top/' + this.properties.parentId,
-        method: 'GET',
-        success: (res) => {
-          if (res.data.code !== 200) {
-            that.setData({
-              isShowDialog: true,
-              dialogInfo: {
-                title: '出现问题了'
-              }
-            })
-            return
-          }
-          let rsp = this.fixDataTime(res.data.data[0])
+      re({
+        url: "/top/" + this.properties.parentId, method: "GET"
+      }).then((res) => {
+        if (res.code === 200) {
+          let rsp = that.fixDataTime(res.data[0])
           this.setData({
             rspData: rsp
           })
 
         }
+
       })
 
     },
@@ -166,6 +118,95 @@ Component({
         }
       }
       return obj
-    }
+    },
+    addNewCommentItem(id, parentId) {
+      let that = this
+      let user = wx.getStorageSync('userInfo');
+      let tem = that.data.rspData.replies
+      let index2
+      let newItem = {
+        "content": that.data.content,
+        "createdAt": "刚刚",
+        "id": id,
+        "photos": [],
+        "user": {
+          "name": user.name,
+          "photo": user.photo,
+          "userId": user.userId
+        }
+      }
+      if (parentId === that.properties.parentId) {
+        tem.unshift(newItem)
+        that.setData({
+          ['rspData.replies']: tem
+        })
+        return
+      }
+      for (let i = 0; i < tem.length; i++) {
+        if (tem[i].id === parentId) {
+          let tem2 = tem[i].replies
+          tem2.unshift(newItem)
+          that.setData({
+            ['rspData.replies[' + i + '].replies']: tem2
+          })
+          return
+        }
+        for (let j = 0; j < tem[i].replies.length; j++) {
+          if (tem[i].replies[j].id === parentId) {
+            let tem3 = tem[i].replies[j].replies
+            tem3.unshift(newItem)
+            that.setData({
+              ['rspData.replies[' + i + '].replies[' + j + '].replies']: tem3
+            })
+            return
+          }
+
+        }
+      }
+
+    },
+    changeObjComment(e) {
+      console.log(e.currentTarget.dataset);
+      if (e.currentTarget.dataset.id) {
+        this.setData({
+          objId: Math.round(e.currentTarget.dataset.id),
+          isFocusInput: true
+        })
+
+      }
+    },
+    likeItem(e) {
+      let that = this
+      re({
+        url: "/commentLike?id=" + e.currentTarget.dataset.id,
+        method: 'POST',
+      }).then(res => {
+        if (res.code === 200) {
+          if (that.data.rspData.id == e.currentTarget.dataset.id) {
+            that.setData({
+              ['rspData.isLike']: res.data.status,
+              ['rspData.likeCount']: that.data.rspData.likeCount + (res.data.status ? 1 : -1)
+            })
+            return
+          }
+          for (let i = 0; i < that.data.rspData.replies.length; i++) {
+            if (that.data.rspData.replies[i].id === e.currentTarget.dataset.id) {
+              that.setData({
+                ['rspData.replies[' + i + '].isLike']: res.data.status,
+                ['rspData.replies[' + i + '].likeCount']: that.data.rspData.replies[i].likeCount + (res.data.status ? 1 : -1)
+              })
+            }
+            return
+          }
+        }
+      }).catch(e => {
+        this.openDialog({
+          title: '操作失败',
+          info: e
+        })
+      })
+
+
+    },
   }
 })

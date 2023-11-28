@@ -1,11 +1,9 @@
-// index.js
-// 获取应用实例
 const app = getApp()
-
+const re = require('../../utils/request.js')
 Page({
   data: {
     loading: false,
-    currentPage: 0,
+    currentPage: 1,
     pageSize: 6,
     previewItemWidth: 0,
     isShowInfo: false,
@@ -49,6 +47,7 @@ Page({
   loadMore() {
     let that = this
     that.fetchHome().then((data) => {
+      console.log(data);
       if (data.rows.length == 0) {
         that.setData({
           isShowMoreEnd: true
@@ -89,55 +88,45 @@ Page({
       url: url
     })
   },
-  fetchHome() {
+  async fetchHome() {
     let that = this
     let tem = {}
-    that.loading()
     return new Promise((resolve, reject) => {
-      wx.request({
-        url: app.globalData.apiHost + '/home?name=' + that.data.searchKey + '&pageNum=' + that.data.currentPage + '&pageSize=' + that.data.pageSize,
-        success: (res) => {
-          that.loaded()
-          if (res.data.code !== 200) {
-            let log = res.data.msg || res.data.errMsg || res.data.error
-            that.openDialog({
-              title: '加载失败',
-              info: '请检查网络:' + log
-            })
-            reject(res)
-          } else {
-            resolve(res.data.data)
-          }
-
-        },
-        fail: (res) => {
-          that.loaded()
-          that.openDialog({
-            title: '加载失败',
-            info: '请检查网络'
-          })
-          reject(res)
+      that.loading()
+      re({
+        url: '/home?name=' + that.data.searchKey + '&pageNum=' + that.data.currentPage + '&pageSize=' + that.data.pageSize,
+        method: 'GET'
+      }).then(res => {
+        if (res.code == 200) {
+          resolve(res.data)
         }
+      }).catch(err => {
+        reject(err)
+      }).finally(() => {
+        that.loaded()
       })
     })
+
+
   },
   onLoad() {
+    let that = this
     let pageWidth = wx.getSystemInfoSync().windowWidth;
-    this.setData({
+    that.setData({
       previewItemWidth: pageWidth / 2 - 27
     })
-    this.fetchHome()
+    that.fetchHome()
       .then(data => {
-        if (data) {
-          this.setData({
-            animalInfo: data
-          })
-        }
+        that.setData({
+          animalInfo: data
+        })
       })
-      .catch(err => {
-        console.log(err)
+      .catch(e => {
+        that.openDialog({
+          title: '出现问题了',
+          info: e.errMsg || e.msg || e
+        })
       })
-
   },
 
 

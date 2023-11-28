@@ -1,117 +1,160 @@
 <view class="submit">
-  <view class="submit-container">
-    <view class="submitInfo">
-      <view class="submit-form">
-        <text>昵称</text>
-        <input
-          type="text"
-          placeholder="猫猫狗狗昵称"
-          value="{{formData.name}}"
-        />
-      </view>
+	<view class="submit-container">
+		<view class="submitInfo">
+			<view class="submit-form">
+				<text>昵称</text>
+				<input
+					type="text"
+					placeholder="猫猫狗狗昵称"
+					model:value="{{name}}" />
+			</view>
+			<view class="submit-form">
+				<text>发现地点</text>
+				<input
+					type="text"
+					placeholder="发现地点"
+					model:value="{{foundPlace}}" />
+			</view>
+			<view class="submit-form">
+				<text>种类</text>
+				<view class="submit-btns">
+					<view
+						class="submit-radio b {{type===1?'active':''}}"
+						bindtap="chooseType"
+						data-type="type"
+						data-value="1">
+						猫猫
+					</view>
+					<view
+						class="submit-radio b {{type===2?'active':''}}"
+						bindtap="chooseType"
+						data-type="type"
+						data-value="2">
+						狗狗
+					</view>
+				</view>
+			</view>
 
-      <view class="submit-form">
-        <text>性别</text>
-        <view class="submit-btns">
-          <view
-            class="submit-radio man {{formData.sex===1?'active':''}}"
-            bindtap="chooseSex"
-            data-sex="1"
-          >
-            男
-          </view>
-          <view
-            class="submit-radio woman {{formData.sex===2?'active':''}}"
-            bindtap="chooseSex"
-            data-sex="2"
-          >
-            女
-          </view>
-          <view
-            class="submit-radio none {{formData.sex===0?'active':''}}"
-            bindtap="chooseSex"
-            data-sex="0"
-          >
-            未知
-          </view>
-        </view>
-      </view>
+			<view class="submit-form">
+				<text>健康状态</text>
+				<view class="submit-btns">
+					<view
+						class="submit-radio p {{status===1?'active':''}}"
+						bindtap="chooseType"
+						data-type="status"
+						data-value="1">
+						健康
+					</view>
+					<view
+						class="submit-radio b {{status===2?'active':''}}"
+						bindtap="chooseType"
+						data-type="status"
+						data-value="2">
+						生病
+					</view>
+					<view
+						class="submit-radio g {{status===-1?'active':''}}"
+						bindtap="chooseType"
+						data-type="status"
+						data-value="-1">
+						未知
+					</view>
+				</view>
+			</view>
+			<view class="submit-form">
+				<text>年龄</text>
+				<input
+					type="text"
+					placeholder="它几岁啦"
+					model:value="{{age}}" />
+			</view>
+			<view class="submit-form">
+				<text>性别</text>
+				<view class="submit-btns">
+					<view
+						class="submit-radio b {{sex===1?'active':''}}"
+						bindtap="chooseType"
+						data-type="sex"
+						data-value="1">
+						男
+					</view>
+					<view
+						class="submit-radio p {{sex===2?'active':''}}"
+						bindtap="chooseType"
+						data-type="sex"
+						data-value="2">
+						女
+					</view>
+					<view
+						class="submit-radio g {{sex===0?'active':''}}"
+						bindtap="chooseType"
+						data-type="sex"
+						data-value="0">
+						未知
+					</view>
+				</view>
+			</view>
 
-      <view class="submit-form">
-        <text>年龄</text>
-        <input
-          type="text"
-          placeholder="修狗狗几岁啦"
-          value="{{formData.age}}"
-        />
-      </view>
-      <view class="submit-form">
-        <text>种类</text>
-        <view class="submit-btns">
-          <view
-            class="submit-radio man {{formData.type===1?'active':''}}"
-            bindtap="chooseType"
-            data-type="1"
-          >
-            猫猫
-          </view>
-          <view
-            class="submit-radio man {{formData.type===2?'active':''}}"
-            bindtap="chooseType"
-            data-type="2"
-          >
-            狗狗
-          </view>
-        </view>
-      </view>
-      <view class="submit-form">
-        <text>标签</text>
-        <view class="submit-tags">
-          <view
-            wx:for="{{tagList}}"
-            wx:key="item"
-            class="submit-radio man {{item.status?'active':''}}"
-            bindtap="chooseTag"
-            data-tag="{{index}}"
-            style="width:{{tagItemWidth}}px"
-          >
-            {{item.value}}
-          </view>
+			<view class="submit-form">
+				<text>标签</text>
+				<view class="submit-tags">
+					<view
+						wx:for="{{tagList}}"
+						wx:key="item"
+						class="submit-radio g {{item.status?'active':''}}"
+						bindtap="chooseTag"
+						data-tag="{{index}}"
+						style="width:{{tagItemWidth}}px">
+						{{item.value}}
+					</view>
 
-          <view
-            class="submit-radio submit-add"
-            bindtap="dialogActive"
-            style="width:{{tagItemWidth}}px"
-          >
-            添加 +
-          </view>
-        </view>
-      </view>
-      <view class="submit-form">
-        <text>图片</text>
-        <upload-pic> </upload-pic>
-      </view>
+					<view
+						class="submit-radio submit-add"
+						bindtap="dialogActive"
+						style="width:{{tagItemWidth}}px">
+						添加 +
+					</view>
+				</view>
+			</view>
+			<view class="submit-form">
+				<text>图片</text>
+				<view class="upload-pic">
+					<view class="upload-pic-list">
+						<view
+							class="upload-pic-item"
+							wx:for="{{picList}}"
+							wx:key="item"
+							data-index="{{index}}"
+							bindtap="delTemPic"
+							style="width:{{itemWidth}}px;height:{{itemWidth}}px">
+							<image src="{{item}}" />
+						</view>
+						<view
+							class="upload-pic-item upload-pic-btn"
+							bindtap="addPic"
+							style="width:{{itemWidth}}px;height:{{itemWidth}}px">
+						</view>
+					</view>
+				</view>
+			</view>
 
-      <view
-        class="submit-radio submit-btn"
-        bindtap="uploadInfo"
-        style="width: 80%; margin: 20px auto 0 auto"
-      >
-        大功告成
-      </view>
-    </view>
-  </view>
+			<view
+				class="submit-radio submit-btn"
+				bindtap="uploadInfo"
+				style="width: 80%; margin: 20px auto 0 auto">
+				大功告成
+			</view>
+		</view>
+	</view>
 </view>
 <add-tag
-  bindtap="dialogActive"
-  wx:if="{{isShowAdd}}"
-  bind:addTag="addTag"
-  bind:openDialog="openDialog"
-  data-title
-  data-info
-></add-tag>
+	bindtap="dialogActive"
+	wx:if="{{isShowAdd}}"
+	bind:addTag="addTag"
+	bind:openDialog="openDialog"
+	data-title
+	data-info></add-tag>
 <dialog
-  isShowDialog="{{isShowDialog}}"
-  title="{{dialogInfo.title}}"
-  info="{{dialogInfo.info}}"
-></dialog>
+	isShowDialog="{{isShowDialog}}"
+	title="{{dialogInfo.title}}"
+	info="{{dialogInfo.info}}"></dialog>

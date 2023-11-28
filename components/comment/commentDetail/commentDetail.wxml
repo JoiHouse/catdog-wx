@@ -19,7 +19,8 @@
 					<view class="comment-list">
 						<view
 							class="detail-comment-item detail-card"
-							bindtap="detailDialogAcitve">
+							data-id="{{rspData.id}}"
+							bindtap="changeObjComment">
 							<view class="detail-comment-item-t">
 								<image src="{{rspData.user.photo}}" />
 								<view class="detail-comment-t-user">
@@ -42,11 +43,17 @@
 							</view>
 							<view class="comment-item-fun">
 								<view>
-									<text class="iconfont icon-heart_outlined">
-										<text>123</text>
+									<text
+										class="iconfont {{rspData.isLike?'icon-heart':'icon-heart_outlined'}}"
+										catchtap="likeItem"
+										data-id="{{parentId}}">
+										
+										<text>{{rspData.likeCount>0?rspData.likeCount:''}}</text>
 									</text>
 									<text class="iconfont icon-comment">
-										<text>123</text>
+										<text
+											>{{rspData.replies.length>0?rspData.replies.length:''}}</text
+										>
 									</text>
 								</view>
 							</view>
@@ -58,13 +65,21 @@
 						class="comment-2"
 						wx:for="{{rspData.replies}}"
 						wx:for-index="index_1"
-						wx:key="index_1">
+						wx:key="index_1"
+						bindtap="changeObjComment"
+						data-id="{{rspData.replies[index_1].id}}">
 						<view>
 							<view class="comment-2-user">
 								<image src="{{rspData.replies[index_1].user.photo}}" />
 								{{rspData.replies[index_1].user.name}}
-								<text class="iconfont icon-heart_outlined"
-									><text>123</text></text
+								<text
+									class="iconfont {{rspData.replies[index_1].isLike?'icon-heart':'icon-heart_outlined'}}"
+									catchtap="likeItem"
+									data-id="{{rspData.replies[index_1].id}}"
+									tapstop
+									><text
+										>{{rspData.replies[index_1].likeCount?rspData.replies[index_1].likeCount:''}}</text
+									></text
 								>
 							</view>
 							<view class="comment-2-text">
@@ -99,6 +114,7 @@
 							<textarea
 								adjustPosition="{{true}}"
 								auto-height="{{true}}"
+								focus="{{isFocusInput}}"
 								show-confirm-bar="{{false}}"
 								model:value="{{content}}"
 								placeholder="美好评论，温暖你我心灵"
